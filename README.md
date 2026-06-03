@@ -2,7 +2,6 @@
 
 This project is inspired by Llewellyn Falco. Its main focus is helping developers improve their ability to identify code smells. Recognizing a code smell is often the first step in refactoring, and this project aims to strengthen that skill through rapid pattern recognition exercises. Built as a learn-by-building project using Laravel and Vue.
 
----
 ## Features
 
 ### To Be Implemented
@@ -13,7 +12,6 @@ This project is inspired by Llewellyn Falco. Its main focus is helping developer
 - Improvement statistics
 - Multiple code smell categories
 
----
 ## Background Information
 
 In the video referenced down below by Llewellyn falco, he starts off with a pattern recognition exercises about sparrows. The aim for this game is to get the brain subconcious part of your brain to reconsgize the different types of the sparrow (House and Song).
@@ -24,7 +22,6 @@ Now, we shift to code smells in the second half of the video the viewers are app
 
 As mentioned in the descrition identifying the pattern is the first step in refactorting.
 
----
 
 ## References
 
