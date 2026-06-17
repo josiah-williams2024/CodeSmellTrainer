@@ -7,6 +7,8 @@ const currentCardIndex = ref(0);
 const score = ref(0);
 const finished = ref(false);
 const questionsAnswered = ref(0);
+const elapsedSeconds = ref(0);
+let timer: number;
 
 const props = defineProps<{
     deck: {
@@ -15,7 +17,6 @@ const props = defineProps<{
         description: string;
         cards: Array<{
             id: number;
-            title: string;
             code_snippet: string;
             answer: string;
             explanation: string;
@@ -23,12 +24,22 @@ const props = defineProps<{
     };
 }>();
 
+const startTimer = () => {
+    clearInterval(timer);
+
+    timer = window.setInterval(() => {
+        elapsedSeconds.value++;
+    }, 1000);
+};
 onMounted(() => {
     window.addEventListener('keydown', handleArrowKeys);
+
+   startTimer();
 });
 
 onUnmounted(() => {
     window.removeEventListener('keydown', handleArrowKeys);
+    clearInterval(timer);
 });
 
 const currentCard = computed(() => {
@@ -44,6 +55,7 @@ const answer = (choice: string) => {
 
     if (currentCardIndex.value === props.deck.cards.length - 1) {
         finished.value = true;
+        clearInterval(timer);
 
         return;
     }
@@ -60,6 +72,10 @@ const accuracy = computed(() => {
 });
 
 const handleArrowKeys = (event: KeyboardEvent) => {
+    if(finished.value) {
+        return;
+    }
+
     if (event.key === 'ArrowLeft') {
         answer('Short Method');
     }
@@ -70,11 +86,22 @@ const handleArrowKeys = (event: KeyboardEvent) => {
 };
 
 const playAgain = () => {
-     currentCardIndex.value = 0;
-     score.value = 0;
-     finished.value = false;
-     questionsAnswered.value = 0;
+    currentCardIndex.value = 0;
+    score.value = 0;
+    finished.value = false;
+    questionsAnswered.value = 0;
+
+    elapsedSeconds.value = 0;
+
+    startTimer();
 };
+
+const formattedTime = computed(() => {
+    const mins = Math.floor(elapsedSeconds.value / 60);
+    const secs = elapsedSeconds.value % 60;
+
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+});
 </script>
 
 <template>
@@ -98,6 +125,8 @@ const playAgain = () => {
                     Card {{ currentCardIndex + 1 }} /
                     {{ props.deck.cards.length }}
                 </p>
+
+                <p class="text-sm text-gray-500">Time: {{ formattedTime }}</p>
             </header>
             <section class="flex-1 overflow-hidden">
                 <pre
@@ -140,6 +169,8 @@ const playAgain = () => {
                 </p>
 
                 <p class="text-xl">Accuracy: {{ accuracy }}%</p>
+
+                <p class="text-xl">Time: {{ formattedTime }}</p>
             </div>
 
             <div class="flex justify-center gap-4">
