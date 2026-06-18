@@ -15,7 +15,7 @@ export type Props = {
     twoFactorEnabled?: boolean;
 };
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
     canManageTwoFactor: false,
     requiresConfirmation: false,
     twoFactorEnabled: false,
@@ -86,8 +86,8 @@ onUnmounted(() => clearTwoFactorAuthData());
 
         <TwoFactorSetupModal
             v-model:isOpen="showSetupModal"
-            :requiresConfirmation="requiresConfirmation"
-            :twoFactorEnabled="twoFactorEnabled"
+            :requiresConfirmation="props.requiresConfirmation"
+            :twoFactorEnabled="props.twoFactorEnabled"
         />
     </div>
 </template>

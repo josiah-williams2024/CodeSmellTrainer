@@ -12,7 +12,7 @@ export type Props = {
     passkeys?: Passkey[];
 };
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
     canManagePasskeys: false,
     passkeys: () => [],
 });
@@ -38,7 +38,7 @@ const handleRegisterSuccess = () => {
         />
 
         <div class="overflow-hidden rounded-lg border border-border">
-            <template v-if="passkeys.length">
+            <template v-if="props.passkeys.length">
                 <PasskeyItem
                     v-for="passkey in passkeys"
                     :key="passkey.id"
