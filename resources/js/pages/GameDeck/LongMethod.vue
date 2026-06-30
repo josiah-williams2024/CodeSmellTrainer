@@ -106,7 +106,7 @@ const formattedTime = computed(() => {
 
 <template>
     <main
-        class="flex min-h-screen items-center justify-center bg-slate-100 p-2 md:p-4"
+        class="flex min-h-screen items-center justify-center bg-slate-200 p-2 md:p-4"
     >
         <article
             v-if="!finished"

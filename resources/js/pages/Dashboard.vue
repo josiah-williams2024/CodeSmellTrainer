@@ -17,7 +17,7 @@ defineOptions({
 
 
 <template>
-    <main class="min-h-screen bg-slate-100 p-8">
+    <main class="min-h-screen bg-slate-200 p-8">
         <header class="mb-10">
             <h1 class="text-center text-4xl font-bold">Code Smell Trainer</h1>
         </header>
@@ -26,7 +26,7 @@ defineOptions({
 
             <Link
                 :href="game()"
-                class="flex h-72 flex-col justify-center rounded-2xl border border-slate-200 bg-sky-100 p-8 shadow-lg transition-all duration-200 hover:-translate-y-1 hover:bg-sky-200 hover:shadow-xl"
+                class="flex h-72 flex-col justify-center rounded-2xl border border-slate-300 bg-sky-100 p-8 shadow-lg transition-all duration-200 hover:-translate-y-1 hover:bg-sky-200 hover:shadow-xl"
             >
                 <div class="text-6xl">🎮</div>
 
@@ -41,7 +41,7 @@ defineOptions({
             <div class="grid grid-cols-2 gap-6">
                 <Link
                     :href="stats()"
-                    class="flex h-56 flex-col justify-center rounded-2xl border border-slate-200 bg-sky-100 p-8 shadow-lg transition-all duration-200 hover:-translate-y-1 hover:bg-sky-200 hover:shadow-xl"
+                    class="flex h-56 flex-col justify-center rounded-2xl border border-slate-300 bg-sky-100 p-8 shadow-lg transition-all duration-200 hover:-translate-y-1 hover:bg-sky-200 hover:shadow-xl"
                 >
                     <div class="text-5xl">📊</div>
 
@@ -54,7 +54,7 @@ defineOptions({
 
                 <Link
                     :href="leaderboard()"
-                    class="flex h-56 flex-col justify-center rounded-2xl border border-slate-200 bg-sky-100 p-8 shadow-lg transition-all duration-200 hover:-translate-y-1 hover:bg-sky-200 hover:shadow-xl"
+                    class="flex h-56 flex-col justify-center rounded-2xl border border-slate-300 bg-sky-100 p-8 shadow-lg transition-all duration-200 hover:-translate-y-1 hover:bg-sky-200 hover:shadow-xl"
                 >
                     <div class="text-5xl">🏆</div>
 
@@ -69,7 +69,7 @@ defineOptions({
 
             <Link
                 :href="learncodesmells()"
-                class="flex h-72 flex-col justify-center rounded-2xl border border-slate-200 bg-sky-100 p-8 shadow-lg transition-all duration-200 hover:-translate-y-1 hover:bg-sky-200 hover:shadow-xl"
+                class="flex h-72 flex-col justify-center rounded-2xl border border-slate-300 bg-sky-100 p-8 shadow-lg transition-all duration-200 hover:-translate-y-1 hover:bg-sky-200 hover:shadow-xl"
             >
                 <div class="text-6xl">📚</div>
 
