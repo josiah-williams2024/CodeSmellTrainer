@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Link } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3';
 import { computed, ref, onMounted, onUnmounted } from 'vue';
 import { game } from '@/routes';
 
@@ -105,6 +105,7 @@ const formattedTime = computed(() => {
 </script>
 
 <template>
+    <Head title="LongMethodDeck"></Head>
     <main
         class="flex min-h-screen items-center justify-center bg-slate-200 p-2 md:p-4"
     >

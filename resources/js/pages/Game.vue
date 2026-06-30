@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { Link } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3';
 import { deckLongMethod } from '@/routes';
 </script>
 
 <template>
+    <Head title="Game"></Head>
     <main class="min-h-screen bg-slate-200 p-4 md:p-6 lg:p-8">
         <header class="mb-8">
             <h1 class="text-center text-3xl font-bold">Select a Deck</h1>

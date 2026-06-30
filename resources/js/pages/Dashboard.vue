@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {  Link } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3';
 import { dashboard, game, stats, learncodesmells, leaderboard} from '@/routes';
 
 defineOptions({
@@ -17,6 +17,7 @@ defineOptions({
 
 
 <template>
+    <Head title="Dashboard"></Head>
     <main class="min-h-screen bg-slate-200 p-8">
         <header class="mb-10">
             <h1 class="text-center text-4xl font-bold">Code Smell Trainer</h1>
