@@ -4,7 +4,7 @@ import { deckLongMethod } from '@/routes';
 </script>
 
 <template>
-    <main class="min-h-screen bg-gray-100 p-4 md:p-6 lg:p-8">
+    <main class="min-h-screen bg-slate-100 p-4 md:p-6 lg:p-8">
         <header class="mb-8">
             <h1 class="text-center text-3xl font-bold">Select a Deck</h1>
         </header>
@@ -14,7 +14,7 @@ import { deckLongMethod } from '@/routes';
         >
             <Link
                 :href="deckLongMethod()"
-                class="flex h-64 flex-col rounded-xl border-2 border-red-500 bg-slate-100 p-6 shadow-2xl"
+                class="flex h-64 flex-col rounded-xl border-2 border-red-500 bg-slate-200 p-6 shadow-2xl"
             >
                 <h2 class="text-2xl font-semibold">Long Method</h2>
 
@@ -30,7 +30,7 @@ import { deckLongMethod } from '@/routes';
 
             <Link
                 href="#"
-                class="flex h-64 flex-col rounded-xl border-2 border-red-500 bg-slate-100 p-6 shadow-2xl"
+                class="flex h-64 flex-col rounded-xl border-2 border-red-500 bg-slate-200 p-6 shadow-2xl"
             >
                 <h2 class="text-2xl font-semibold">Clutter</h2>
 
@@ -46,7 +46,7 @@ import { deckLongMethod } from '@/routes';
 
             <Link
                 href="#"
-                class="flex h-64 flex-col rounded-xl border-2 border-red-500 bg-slate-100 p-6 shadow-2xl"
+                class="flex h-64 flex-col rounded-xl border-2 border-red-500 bg-slate-200 p-6 shadow-2xl"
             >
                 <h2 class="text-2xl font-semibold">Duplication</h2>
 

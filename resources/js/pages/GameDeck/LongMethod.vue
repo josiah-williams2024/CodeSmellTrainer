@@ -34,7 +34,7 @@ const startTimer = () => {
 onMounted(() => {
     window.addEventListener('keydown', handleArrowKeys);
 
-   startTimer();
+    startTimer();
 });
 
 onUnmounted(() => {
@@ -72,7 +72,7 @@ const accuracy = computed(() => {
 });
 
 const handleArrowKeys = (event: KeyboardEvent) => {
-    if(finished.value) {
+    if (finished.value) {
         return;
     }
 
@@ -106,7 +106,7 @@ const formattedTime = computed(() => {
 
 <template>
     <main
-        class="flex min-h-screen items-center justify-center bg-gray-100 p-2 md:p-4"
+        class="flex min-h-screen items-center justify-center bg-slate-100 p-2 md:p-4"
     >
         <article
             v-if="!finished"
