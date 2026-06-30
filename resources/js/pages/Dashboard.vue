@@ -29,7 +29,7 @@ defineOptions({
                 :href="game()"
                 class="flex h-72 flex-col justify-center rounded-2xl border border-slate-300 bg-sky-100 p-8 shadow-lg transition-all duration-200 hover:-translate-y-1 hover:bg-sky-200 hover:shadow-xl"
             >
-                <div class="text-6xl">🎮</div>
+                <div class="text-6xl"></div>
 
                 <h2 class="mt-4 text-3xl font-bold">Play Game</h2>
 
@@ -44,7 +44,7 @@ defineOptions({
                     :href="stats()"
                     class="flex h-56 flex-col justify-center rounded-2xl border border-slate-300 bg-sky-100 p-8 shadow-lg transition-all duration-200 hover:-translate-y-1 hover:bg-sky-200 hover:shadow-xl"
                 >
-                    <div class="text-5xl">📊</div>
+                    <div class="text-5xl"></div>
 
                     <h2 class="mt-4 text-2xl font-bold">Statistics</h2>
 
@@ -57,7 +57,7 @@ defineOptions({
                     :href="leaderboard()"
                     class="flex h-56 flex-col justify-center rounded-2xl border border-slate-300 bg-sky-100 p-8 shadow-lg transition-all duration-200 hover:-translate-y-1 hover:bg-sky-200 hover:shadow-xl"
                 >
-                    <div class="text-5xl">🏆</div>
+                    <div class="text-5xl"></div>
 
                     <h2 class="mt-4 text-2xl font-bold">Leaderboard</h2>
 
@@ -72,7 +72,7 @@ defineOptions({
                 :href="learncodesmells()"
                 class="flex h-72 flex-col justify-center rounded-2xl border border-slate-300 bg-sky-100 p-8 shadow-lg transition-all duration-200 hover:-translate-y-1 hover:bg-sky-200 hover:shadow-xl"
             >
-                <div class="text-6xl">📚</div>
+                <div class="text-6xl"></div>
 
                 <h2 class="mt-4 text-3xl font-bold">Study Code Smells</h2>
 

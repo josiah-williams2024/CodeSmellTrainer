@@ -15,7 +15,7 @@ import { deckLongMethod } from '@/routes';
         >
             <Link
                 :href="deckLongMethod()"
-                class="flex h-64 flex-col rounded-xl border-2 border-red-500 bg-slate-200 p-6 shadow-2xl"
+                class="flex h-64 flex-col rounded-xl border-2 border-slate-500 bg-slate-100 p-6 shadow-lg transition hover:border-orange-500 hover:shadow-xl"
             >
                 <h2 class="text-2xl font-semibold">Long Method</h2>
 
@@ -31,7 +31,7 @@ import { deckLongMethod } from '@/routes';
 
             <Link
                 href="#"
-                class="flex h-64 flex-col rounded-xl border-2 border-red-500 bg-slate-200 p-6 shadow-2xl"
+                class="flex h-64 flex-col rounded-xl border-2 border-slate-400 bg-slate-100 p-6 opacity-90 shadow-lg"
             >
                 <h2 class="text-2xl font-semibold">Clutter</h2>
 
@@ -47,7 +47,7 @@ import { deckLongMethod } from '@/routes';
 
             <Link
                 href="#"
-                class="flex h-64 flex-col rounded-xl border-2 border-red-500 bg-slate-200 p-6 shadow-2xl"
+                class="flex h-64 flex-col rounded-xl border-2 border-slate-400 bg-slate-100 p-6 opacity-90 shadow-lg"
             >
                 <h2 class="text-2xl font-semibold">Duplication</h2>
 

@@ -11,7 +11,23 @@ import { register, game, learncodesmells } from '@/routes';
     >
         <div class="w-full max-w-6xl">
             <main class="rounded-xl bg-white p-12 shadow-lg">
-                <nav class="flex items-center justify-end gap-4">
+                <nav class="flex items-center justify-between gap-4">
+                    <Link href="/" class="flex items-center gap-4">
+                        <img
+                            src="/logo.svg"
+                            alt="Code Smell Trainer"
+                            class="h-14 w-14"
+                        />
+
+                        <div>
+                            <p class="font-semibold">Code Smell Trainer</p>
+
+                            <p class="text-xs text-muted-foreground">
+                                Learn through practice
+                            </p>
+                        </div>
+                    </Link>
+
                     <Link
                         v-if="$page.props.auth.user"
                         :href="dashboard()"
@@ -20,6 +36,8 @@ import { register, game, learncodesmells } from '@/routes';
                         Dashboard
                     </Link>
                     <template v-else>
+                        <div class="flex items-center gap-4">
+
                         <Link
                             :href="login()"
                             class="inline-block rounded-sm border border-[#19140035] px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#1915014a] dark:border-[#3E3E3A] dark:text-[#EDEDEC] dark:hover:border-[#62605b]"
@@ -32,6 +50,7 @@ import { register, game, learncodesmells } from '@/routes';
                         >
                             Register
                         </Link>
+                        </div>
                     </template>
                 </nav>
                 <section class="text-center">
@@ -60,7 +79,7 @@ import { register, game, learncodesmells } from '@/routes';
                 <hr class="my-12" />
                 <section class="mt-16">
                     <h2 class="mb-8 text-center text-3xl font-bold">
-                        How It Works
+                        How Does It Work?
                     </h2>
 
                     <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
