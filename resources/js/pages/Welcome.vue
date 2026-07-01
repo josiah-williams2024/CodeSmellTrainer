@@ -63,14 +63,14 @@ import { register, game, learncodesmells } from '@/routes';
                     <div class="mt-8 flex justify-center gap-4">
                         <Link
                             :href="game()"
-                            class="flex w-48 items-center justify-center rounded bg-blue-500 px-6 py-3 text-white"
+                            class="flex w-48 items-center justify-center rounded bg-blue-500 px-6 py-3 text-white hover:bg-blue-400"
                         >
                             Play Game
                         </Link>
 
                         <Link
                             :href="learncodesmells()"
-                            class="flex w-48 items-center justify-center rounded bg-blue-500 px-6 py-3 text-white"
+                            class="flex w-48 items-center justify-center rounded bg-blue-500 px-6 py-3 text-white hover:bg-blue-400"
                         >
                             Study Code Smells
                         </Link>
