@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
-import { LucideWrench, LayoutGrid } from '@lucide/vue';
+import { LucideWrench, LayoutGrid , Video} from '@lucide/vue';
 import AppLogo from '@/components/AppLogo.vue';
 import NavFooter from '@/components/NavFooter.vue';
 import NavMain from '@/components/NavMain.vue';
@@ -27,9 +27,14 @@ const mainNavItems: NavItem[] = [
 
 const footerNavItems: NavItem[] = [
     {
-        title: 'Code Smells',
+        title: 'Code Smells Reference',
         href: 'https://refactoring.guru/refactoring/smells',
         icon: LucideWrench,
+    },
+    {
+        title: 'Code Smells Video',
+        href: 'https://www.youtube.com/watch?v=H3L0aN9KItA',
+        icon: Video,
     },
 ];
 </script>

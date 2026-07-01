@@ -107,11 +107,11 @@ const formattedTime = computed(() => {
 <template>
     <Head title="LongMethodDeck"></Head>
     <main
-        class="flex min-h-screen items-center justify-center bg-slate-200 p-2 md:p-4"
+        class="flex min-h-screen items-center justify-center bg-slate-300 p-2 md:p-4"
     >
         <article
             v-if="!finished"
-            class="flex h-[85vh] w-full max-w-7xl flex-col rounded-xl bg-white p-4 shadow-xl md:p-8"
+            class="flex h-[85vh] w-full max-w-7xl flex-col rounded-xl bg-slate-200 p-4 shadow-xl md:p-8"
         >
             <header class="mb-6 text-center">
                 <h1 class="text-2xl font-bold">
