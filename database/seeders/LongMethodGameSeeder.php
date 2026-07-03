@@ -15,7 +15,7 @@ class LongMethodGameSeeder extends Seeder
 
         $deck = Deck::create([
             'name' => 'Long Method Detection',
-            'Description' => 'This deck will allow the user to get better at recognizing long methods',
+            'description' => 'This deck will allow the user to get better at recognizing long methods',
         ]);
 
         $deck->cards()->createMany([
