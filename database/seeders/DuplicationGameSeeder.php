@@ -204,47 +204,10 @@ CODE,
                 'answer' => 'Duplicate Code',
             ],
             [
-                'title' => 'Duplicate Shipping Calculation',
-                'explanation' => 'The shipping calculation has been copied instead of extracted into a reusable method.',
+                'title' => 'Calculate Order Total',
+                'explanation' => 'The calculation appears only once and has not been copied.',
                 'code_snippet' => <<<'CODE'
-public function ship(Order $order): void
-{
-    $shipping = 15;
-
-    if ($order->subtotal > 100) {
-        $shipping = 0;
-    }
-
-    $order->shipping = $shipping;
-
-    Log::info('Shipping calculated.');
-
-    Mail::to($order->customer_email)
-        ->send(new ShippingEstimateMail($order));
-
-    Cache::forget('shipping');
-
-    // More business logic...
-
-    $shipping = 15;
-
-    if ($order->subtotal > 100) {
-        $shipping = 0;
-    }
-
-    Shipment::create([
-        'order_id' => $order->id,
-        'shipping' => $shipping,
-    ]);
-}
-CODE,
-                'answer' => 'Duplicate Code',
-            ],
-            [
-                'title' => 'Repeated Product Total',
-                'explanation' => 'The subtotal calculation appears twice.',
-                'code_snippet' => <<<'CODE'
-public function calculate(ProductOrder $order): void
+public function calculateTotal(Order $order): float
 {
     $subtotal = 0;
 
@@ -252,97 +215,46 @@ public function calculate(ProductOrder $order): void
         $subtotal += $item->price * $item->quantity;
     }
 
-    Log::info('Subtotal calculated.');
+    $tax = $subtotal * 0.13;
 
-    Cache::forget('products');
-
-    event(new ProductCalculated());
-
-    // More unrelated work...
-
-    $subtotal = 0;
-
-    foreach ($order->items as $item) {
-        $subtotal += $item->price * $item->quantity;
-    }
-
-    Report::create([
-        'subtotal' => $subtotal,
-    ]);
+    return $subtotal + $tax;
 }
 CODE,
-                'answer' => 'Duplicate Code',
-            ],
-            [
-                'title' => 'Duplicate Role Assignment',
-                'explanation' => 'The same role assignment logic exists twice.',
+                'answer' => 'Not Duplicate Code',
+            ],[
+                'title' => 'Register Customer',
+                'explanation' => 'Validation occurs once and is not repeated elsewhere in the method.',
                 'code_snippet' => <<<'CODE'
-public function onboard(User $user): void
+public function register(array $data): User
 {
-    if ($user->department === 'Sales') {
-        $user->assignRole('sales');
-    } else {
-        $user->assignRole('employee');
-    }
+    Validator::make($data, [
+        'name' => 'required',
+        'email' => 'required|email',
+        'password' => 'required|min:8',
+    ])->validate();
 
-    Log::info('Role assigned.');
-
+    return User::create($data);
+}
+CODE,
+                'answer' => 'Not Duplicate Code',
+            ],[
+                'title' => 'Send Welcome Email',
+                'explanation' => 'The email is sent once without any repeated logic.',
+                'code_snippet' => <<<'CODE'
+public function sendWelcome(User $user): void
+{
     Mail::to($user->email)
-        ->send(new OnboardingMail());
+        ->send(new WelcomeMail($user));
 
-    event(new UserOnboarded());
-
-    // More code...
-
-    if ($user->department === 'Sales') {
-        $user->assignRole('sales');
-    } else {
-        $user->assignRole('employee');
-    }
-
-    AuditLog::create([
-        'user_id' => $user->id,
-    ]);
+    Log::info('Welcome email sent.');
 }
 CODE,
-                'answer' => 'Duplicate Code',
-            ],
-            [
-                'title' => 'Repeated Inventory Check',
-                'explanation' => 'Inventory validation is duplicated instead of reused.',
+                'answer' => 'Not Duplicate Code',
+            ],[
+                'title' => 'Generate Daily Report',
+                'explanation' => 'The report is built a single time with no copied sections.',
                 'code_snippet' => <<<'CODE'
-public function reserve(Product $product): void
-{
-    if ($product->quantity <= 0) {
-        throw new Exception('Out of stock.');
-    }
-
-    $product->decrement('quantity');
-
-    Log::info('Inventory updated.');
-
-    Cache::forget('inventory');
-
-    event(new InventoryReserved());
-
-    // Additional processing...
-
-    if ($product->quantity <= 0) {
-        throw new Exception('Out of stock.');
-    }
-
-    Reservation::create([
-        'product_id' => $product->id,
-    ]);
-}
-CODE,
-                'answer' => 'Duplicate Code',
-            ],
-            [
-                'title' => 'Duplicate Report Generation',
-                'explanation' => 'The report-building logic has been copied.',
-                'code_snippet' => <<<'CODE'
-public function generate(): void
+public function generateReport(): void
 {
     $report = [
         'users' => User::count(),
@@ -354,29 +266,26 @@ public function generate(): void
         'reports/daily.json',
         json_encode($report)
     );
-
-    Log::info('Daily report generated.');
-
-    Mail::to('admin@example.com')
-        ->send(new ReportMail($report));
-
-    // Later in the same method...
-
-    $report = [
-        'users' => User::count(),
-        'orders' => Order::count(),
-        'sales' => Sale::sum('amount'),
-    ];
-
-    Storage::put(
-        'reports/archive.json',
-        json_encode($report)
-    );
 }
 CODE,
-                'answer' => 'Duplicate Code',
-            ],
+                'answer' => 'Not Duplicate Code',
+            ],[
+                'title' => 'Assign User Role',
+                'explanation' => 'The role assignment logic exists in only one place.',
+                'code_snippet' => <<<'CODE'
+public function assignRole(User $user): void
+{
+    if ($user->department === 'Sales') {
+        $user->assignRole('sales');
+    } else {
+        $user->assignRole('employee');
+    }
 
+    Log::info('Role assigned.');
+}
+CODE,
+                'answer' => 'Not Duplicate Code',
+            ],
         ]);
     }
 }

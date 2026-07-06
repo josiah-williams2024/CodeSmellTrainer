@@ -146,129 +146,74 @@ CODE,
                 'answer' => 'Clutter',
             ],
             [
-                'title' => 'Get Full Name',
-                'explanation' => 'Every obvious action is documented.',
+                'title' => 'Business Rule',
+                'explanation' => 'The comment explains a business rule that is not obvious from the implementation.',
                 'code_snippet' => <<<'CODE'
-///////////////////////////////////////////////////////////
-// Name Builder
-//
-// Retrieve the first name.
-//
-// Retrieve the last name.
-//
-// Join them together.
-//
-// Return the full name.
-//
-// End of method notes.
-///////////////////////////////////////////////////////////
-public function fullName(User $user): string
+public function calculateShipping(float $subtotal): float
 {
-    return "{$user->first_name} {$user->last_name}";
-}
-CODE,
-                'answer' => 'Clutter',
-            ],
-            [
-                'title' => 'Total Price',
-                'explanation' => 'Large banner comments hide a tiny implementation.',
-                'code_snippet' => <<<'CODE'
-///////////////////////////////////////////////////////////
-// PRICE CALCULATION
-//
-// Add subtotal.
-//
-// Add tax.
-//
-// Add shipping.
-//
-// Return the result.
-//
-// Calculation complete.
-//
-// Thank you for reading.
-///////////////////////////////////////////////////////////
-public function total(float $subtotal, float $tax, float $shipping): float
-{
-    return $subtotal + $tax + $shipping;
-}
-CODE,
-                'answer' => 'Clutter',
-            ],
-            [
-                'title' => 'Send Welcome Email',
-                'explanation' => 'Comments simply restate what the code already says.',
-                'code_snippet' => <<<'CODE'
-///////////////////////////////////////////////////////////
-// Email Process
-//
-// Get the user's email.
-//
-// Send the welcome email.
-//
-// Finish the method.
-//
-// Nothing else happens.
-//
-// End.
-///////////////////////////////////////////////////////////
-public function sendWelcome(User $user): void
-{
-    Mail::to($user->email)
-        ->send(new WelcomeMail($user));
-}
-CODE,
-                'answer' => 'Clutter',
-            ],
-            [
-                'title' => 'Count Orders',
-                'explanation' => 'A trivial method with an unnecessarily large comment block.',
-                'code_snippet' => <<<'CODE'
-///////////////////////////////////////////////////////////
-// Order Counter
-//
-// Get every order.
-//
-// Count every order.
-//
-// Return the total.
-//
-// This method is very important.
-//
-// End documentation.
-///////////////////////////////////////////////////////////
-public function countOrders(): int
-{
-    return Order::count();
-}
-CODE,
-                'answer' => 'Clutter',
-            ],
-            [
-                'title' => 'Save User',
-                'explanation' => 'The comments provide no additional value.',
-                'code_snippet' => <<<'CODE'
-///////////////////////////////////////////////////////////
-// User Saving
-//
-// Save the user.
-//
-// Return the saved user.
-//
-// The save operation writes to the database.
-//
-// End.
-//
-// Really the end.
-///////////////////////////////////////////////////////////
-public function save(User $user): User
-{
-    $user->save();
+    // Customers who spend over $100 receive free shipping.
+    if ($subtotal >= 100) {
+        return 0;
+    }
 
-    return $user;
+    return 15;
 }
 CODE,
-                'answer' => 'Clutter',
+                'answer' => 'Clean',
+            ],
+            [
+                'title' => 'Legacy System Workaround',
+                'explanation' => 'The comment explains why an unusual condition exists.',
+                'code_snippet' => <<<'CODE'
+public function isSuccessful(array $response): bool
+{
+    // Legacy payment gateway returns "0" instead of false.
+    return $response['status'] !== '0';
+}
+CODE,
+                'answer' => 'Clean',
+            ],
+            [
+                'title' => 'Helpful TODO',
+                'explanation' => 'A TODO identifies future work rather than narrating the code.',
+                'code_snippet' => <<<'CODE'
+public function generateToken(): string
+{
+    // TODO: Replace with UUIDv7 once the library is upgraded.
+    return bin2hex(random_bytes(32));
+}
+CODE,
+                'answer' => 'Clean',
+            ],
+            [
+                'title' => 'Algorithm Explanation',
+                'explanation' => 'The comment explains why the guard clause exists.',
+                'code_snippet' => <<<'CODE'
+public function completionPercentage(int $completed, int $total): float
+{
+    // Avoid dividing by zero when no tasks have been created yet.
+    if ($total === 0) {
+        return 0;
+    }
+
+    return ($completed / $total) * 100;
+}
+CODE,
+                'answer' => 'Clean',
+            ],
+            [
+                'title' => 'Concise PHPDoc',
+                'explanation' => 'The PHPDoc describes the purpose of the method without repeating every line.',
+                'code_snippet' => <<<'CODE'
+/**
+ * Returns the authenticated user or throws an exception.
+ */
+public function currentUser(): User
+{
+    return auth()->userOrFail();
+}
+CODE,
+                'answer' => 'Clean',
             ],
         ]);
     }

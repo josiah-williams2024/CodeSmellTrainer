@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Head, Link } from '@inertiajs/vue3';
-import { deckLongMethod } from '@/routes';
+import { deckLongMethod, deckDuplication, deckClutter } from '@/routes';
 </script>
 
 <template>
@@ -20,8 +20,8 @@ import { deckLongMethod } from '@/routes';
                 <h2 class="text-2xl font-semibold">Long Method</h2>
 
                 <p class="mt-3 text-gray-600">
-                    Practice identifying methods that are too long and should be
-                    broken into smaller, easier-to-understand pieces.
+                    Identify methods that are too long and should be
+                    broken into smaller pieces.
                 </p>
 
                 <span class="mt-6 font-medium text-orange-600">
@@ -30,8 +30,8 @@ import { deckLongMethod } from '@/routes';
             </Link>
 
             <Link
-                href="#"
-                class="flex h-64 flex-col rounded-xl border-2 border-slate-400 bg-slate-100 p-6 opacity-90 shadow-lg"
+                :href="deckClutter()"
+                class="flex h-64 flex-col rounded-xl border-2 border-slate-500 bg-slate-100 p-6 shadow-lg transition hover:border-orange-500 hover:shadow-xl"
             >
                 <h2 class="text-2xl font-semibold">Clutter</h2>
 
@@ -41,13 +41,13 @@ import { deckLongMethod } from '@/routes';
                 </p>
 
                 <span class="mt-6 font-medium text-orange-600">
-                    Coming Soon
+                    Start Deck →
                 </span>
             </Link>
 
             <Link
-                href="#"
-                class="flex h-64 flex-col rounded-xl border-2 border-slate-400 bg-slate-100 p-6 opacity-90 shadow-lg"
+                :href="deckDuplication()"
+                class="flex h-64 flex-col rounded-xl border-2 border-slate-500 bg-slate-100 p-6 shadow-lg transition hover:border-orange-500 hover:shadow-xl"
             >
                 <h2 class="text-2xl font-semibold">Duplication</h2>
 
@@ -57,7 +57,7 @@ import { deckLongMethod } from '@/routes';
                 </p>
 
                 <span class="mt-6 font-medium text-orange-600">
-                    Coming Soon
+                    Start Deck →
                 </span>
             </Link>
         </section>

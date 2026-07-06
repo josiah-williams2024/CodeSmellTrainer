@@ -18,6 +18,23 @@ Route::middleware(['auth', 'verified'])->group(function () {
             'deck' => $deck,
         ]);
     })->name('deckLongMethod');
+
+    Route::get('game/deckClutter', function () {
+        $deck = Deck::query()->with('cards')->findOrFail(2);
+
+        return inertia('GameDeck/ClutterDetection', [
+            'deck' => $deck,
+        ]);
+    })->name('deckClutter');
+
+    Route::get('game/deckDuplication', function () {
+        $deck = Deck::query()->with('cards')->findOrFail(3);
+
+        return inertia('GameDeck/DuplicationDetection', [
+            'deck' => $deck,
+        ]);
+    })->name('deckDuplication');
+
 });
 
 require __DIR__.'/settings.php';
