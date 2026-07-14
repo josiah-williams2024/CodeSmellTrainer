@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GameController;
 use App\Models\Deck;
 use Illuminate\Support\Facades\Route;
 
@@ -35,6 +36,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ]);
     })->name('deckDuplication');
 
+    Route::post('gameAttempt', [GameController::class, 'store'])->name('game.store');
 });
 
 require __DIR__.'/settings.php';
