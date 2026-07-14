@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Head, Link } from '@inertiajs/vue3';
 import { computed, ref, onMounted, onUnmounted } from 'vue';
+import gameController from '@/actions/App/Http/Controllers/GameController';
 import { game } from '@/routes';
 
 const currentCardIndex = ref(0);
@@ -8,6 +9,8 @@ const score = ref(0);
 const finished = ref(false);
 const questionsAnswered = ref(0);
 const elapsedSeconds = ref(0);
+const gameEndpoint = gameController.store();
+
 let timer: number;
 
 const props = defineProps<{
@@ -46,6 +49,36 @@ const currentCard = computed(() => {
     return props.deck.cards[currentCardIndex.value];
 });
 
+const saveGameResult = async () => {
+    try {
+        const response = await fetch(gameEndpoint.url, {
+            method: gameEndpoint.method,
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN':
+                    document
+                        .querySelector('meta[name="csrf-token"]')
+                        ?.getAttribute('content') ?? '',
+            },
+            body: JSON.stringify({
+                deck_id: props.deck.id,
+                score: score.value,
+                total_questions: questionsAnswered.value,
+                accuracy: accuracy.value,
+                time_seconds: elapsedSeconds.value,
+            }),
+        });
+
+        if (!response.ok) {
+            console.error('Failed to save game result');
+
+            return;
+        }
+    } catch (error) {
+        console.error('Failed to save game results', error);
+    }
+};
+
 const answer = (choice: string) => {
     questionsAnswered.value++;
 
@@ -56,6 +89,8 @@ const answer = (choice: string) => {
     if (currentCardIndex.value === props.deck.cards.length - 1) {
         finished.value = true;
         clearInterval(timer);
+
+        void saveGameResult();
 
         return;
     }
@@ -105,7 +140,7 @@ const formattedTime = computed(() => {
 </script>
 
 <template>
-    <Head title="LongMethodDeck"></Head>
+    <Head :title="props.deck.name"></Head>
     <main
         class="flex min-h-screen items-center justify-center bg-slate-300 p-2 md:p-4"
     >
