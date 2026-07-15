@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { Head, Link } from '@inertiajs/vue3';
-import { dashboard, game, stats, learncodesmells, leaderboard} from '@/routes';
+import statsController from '@/actions/App/Http/Controllers/StatsController';
+import { dashboard, game, learncodesmells, leaderboard} from '@/routes';
+
 
 defineOptions({
     layout: {
@@ -41,7 +43,7 @@ defineOptions({
 
             <div class="grid grid-cols-2 gap-6">
                 <Link
-                    :href="stats()"
+                    :href="statsController.index()"
                     class="flex h-56 flex-col justify-center rounded-2xl border border-slate-300 bg-sky-100 p-8 shadow-lg transition-all duration-200 hover:-translate-y-1 hover:bg-sky-200 hover:shadow-xl"
                 >
                     <div class="text-5xl"></div>
