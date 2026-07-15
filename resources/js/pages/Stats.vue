@@ -1,5 +1,12 @@
 <script setup lang="ts">
 import { Head } from '@inertiajs/vue3';
+
+const props = defineProps<{
+    stats: Array<any>;
+}>();
+
+console.log('Stats', props.stats[0].id);
+
 </script>
 
 <template>
