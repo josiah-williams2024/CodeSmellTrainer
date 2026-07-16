@@ -6,7 +6,6 @@ const props = defineProps<{
     stats: Array<any>;
 }>();
 
-console.log('Stats', props.stats);
 </script>
 
 <template>
