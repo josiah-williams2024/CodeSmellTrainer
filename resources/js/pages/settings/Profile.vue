@@ -40,7 +40,7 @@ const user = computed(() => page.props.auth.user);
         />
 
         <Form
-            v-bind="ProfileController.update.form()"
+            v-bind="ProfileController.update()"
             class="space-y-6"
             v-slot="{ errors, processing }"
         >
