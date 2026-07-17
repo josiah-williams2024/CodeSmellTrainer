@@ -142,31 +142,35 @@ const formattedTime = computed(() => {
 <template>
     <Head :title="props.deck.name"></Head>
     <main
-        class="flex min-h-screen items-center justify-center bg-slate-300 p-2 md:p-4"
+        class="flex min-h-screen items-center justify-center bg-background p-2 md:p-4"
     >
         <article
             v-if="!finished"
-            class="flex h-[85vh] w-full max-w-7xl flex-col rounded-xl bg-slate-200 p-4 shadow-xl md:p-8"
+            class="flex h-[85vh] w-full max-w-7xl flex-col rounded-xl border border-border bg-card p-4 shadow-xl md:p-8"
         >
             <header class="mb-6 text-center">
-                <h1 class="text-2xl font-bold">
+                <h1 class="text-2xl font-bold text-card-foreground">
                     {{ props.deck.name }}
                 </h1>
 
-                <p class="text-sm text-gray-500">Score : {{ score }}</p>
+                <p class="text-sm text-card-foreground">Score : {{ score }}</p>
 
-                <p class="text-sm text-gray-500">Accuracy {{ accuracy }}%</p>
+                <p class="text-sm text-card-foreground">
+                    Accuracy {{ accuracy }}%
+                </p>
 
-                <p class="text-sm text-gray-500">
+                <p class="text-sm text-card-foreground">
                     Card {{ currentCardIndex + 1 }} /
                     {{ props.deck.cards.length }}
                 </p>
 
-                <p class="text-sm text-gray-500">Time: {{ formattedTime }}</p>
+                <p class="text-sm text-card-foreground">
+                    Time: {{ formattedTime }}
+                </p>
             </header>
             <section class="flex-1 overflow-hidden">
                 <pre
-                    class="h-full overflow-auto rounded border bg-gray-50 p-4 text-left font-mono text-[11px] md:text-xs"
+                    class="h-full overflow-auto rounded-lg border border-border bg-muted p-4 text-left font-mono text-[11px] text-card-foreground md:text-xs"
                 >
             <code>{{ currentCard.code_snippet }}</code>
             </pre>
@@ -176,14 +180,14 @@ const formattedTime = computed(() => {
                     <button
                         type="button"
                         @click="submitAnswer('Clean')"
-                        class="rounded-lg border bg-blue-400 p-4 hover:bg-blue-300"
+                        class="rounded-lg bg-primary p-4 font-medium text-primary-foreground transition-opacity hover:opacity-90"
                     >
                         ⬅ Clean
                     </button>
 
                     <button
                         type="button"
-                        class="rounded-lg border bg-blue-400 p-4 hover:bg-blue-300"
+                        class="rounded-lg bg-primary p-4 font-medium text-primary-foreground transition-opacity hover:opacity-90"
                         @click="submitAnswer('Clutter')"
                     >
                         Clutter ➡
@@ -193,25 +197,31 @@ const formattedTime = computed(() => {
         </article>
         <article
             v-else
-            class="flex h-[85vh] w-full max-w-7xl flex-col rounded-xl bg-white p-4 shadow-xl md:p-8"
+            class="flex h-[85vh] w-full max-w-7xl flex-col rounded-xl border border-border bg-card p-4 shadow-xl md:p-8"
         >
             <div
                 class="flex flex-1 flex-col items-center justify-center text-center"
             >
-                <h1 class="mb-4 text-4xl font-bold">Deck Complete</h1>
+                <h1 class="mb-4 text-4xl font-bold text-card-foreground">
+                    Deck Complete
+                </h1>
 
-                <p class="text-xl">
+                <p class="text-xl text-muted-foreground">
                     Score: {{ score }} / {{ props.deck.cards.length }}
                 </p>
 
-                <p class="text-xl">Accuracy: {{ accuracy }}%</p>
+                <p class="text-xl text-muted-foreground">
+                    Accuracy: {{ accuracy }}%
+                </p>
 
-                <p class="text-xl">Time: {{ formattedTime }}</p>
+                <p class="text-xl text-muted-foreground">
+                    Time: {{ formattedTime }}
+                </p>
             </div>
 
             <div class="flex justify-center gap-4">
                 <button
-                    class="w-40 rounded-lg border bg-blue-400 p-4 hover:bg-blue-300"
+                    class="w-40 rounded-lg bg-primary p-4 text-center font-medium text-primary-foreground transition-opacity hover:opacity-90"
                     @click="playAgain()"
                 >
                     Play Again
@@ -219,7 +229,7 @@ const formattedTime = computed(() => {
 
                 <Link
                     :href="game()"
-                    class="w-40 rounded-lg border bg-blue-400 p-4 text-center hover:bg-blue-300"
+                    class="w-40 rounded-lg bg-primary p-4 text-center font-medium text-primary-foreground transition-opacity hover:opacity-90"
                 >
                     Pick New Deck
                 </Link>
