@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Head, Link } from '@inertiajs/vue3';
 import { computed, ref, onMounted, onUnmounted } from 'vue';
-import * as gameController from '@/actions/App/Http/Controllers/GameController';
+import gameController from '@/actions/App/Http/Controllers/GameController';
 import { game } from '@/routes';
 
 const currentCardIndex = ref(0);
