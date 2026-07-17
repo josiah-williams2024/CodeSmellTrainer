@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Head, Link } from '@inertiajs/vue3';
 import { computed, ref, onMounted, onUnmounted } from 'vue';
+import * as gameController from '@/actions/App/Http/Controllers/GameController';
 import { game } from '@/routes';
 
 const currentCardIndex = ref(0);
@@ -8,6 +9,8 @@ const score = ref(0);
 const finished = ref(false);
 const questionsAnswered = ref(0);
 const elapsedSeconds = ref(0);
+const gameEndpoint = gameController.store();
+
 let timer: number;
 
 const props = defineProps<{
@@ -46,7 +49,37 @@ const currentCard = computed(() => {
     return props.deck.cards[currentCardIndex.value];
 });
 
-const answer = (choice: string) => {
+const saveGameResult = async () => {
+    try {
+        const response = await fetch(gameEndpoint.url, {
+            method: gameEndpoint.method,
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN':
+                    document
+                        .querySelector('meta[name="csrf-token"]')
+                        ?.getAttribute('content') ?? '',
+            },
+            body: JSON.stringify({
+                deck_id: props.deck.id,
+                score: score.value,
+                accuracy: accuracy.value,
+                total_questions: questionsAnswered.value,
+                time_seconds: elapsedSeconds.value,
+            }),
+        });
+
+        if (!response.ok) {
+            console.error('Failed to save game result');
+
+            return;
+        }
+    } catch (error) {
+        console.error('Failed to save game results', error);
+    }
+};
+
+const submitAnswer = (choice: string) => {
     questionsAnswered.value++;
 
     if (choice === currentCard.value.answer) {
@@ -56,6 +89,8 @@ const answer = (choice: string) => {
     if (currentCardIndex.value === props.deck.cards.length - 1) {
         finished.value = true;
         clearInterval(timer);
+
+        void saveGameResult();
 
         return;
     }
@@ -77,11 +112,11 @@ const handleArrowKeys = (event: KeyboardEvent) => {
     }
 
     if (event.key === 'ArrowLeft') {
-        answer('Short Method');
+        submitAnswer('Short Method');
     }
 
     if (event.key === 'ArrowRight') {
-        answer('Long Method');
+        submitAnswer('Long Method');
     }
 };
 
@@ -105,7 +140,7 @@ const formattedTime = computed(() => {
 </script>
 
 <template>
-    <Head title="LongMethodDeck"></Head>
+    <Head :title="props.deck.name"></Head>
     <main
         class="flex min-h-screen items-center justify-center bg-background p-2 md:p-4"
     >
@@ -144,16 +179,16 @@ const formattedTime = computed(() => {
                 <nav class="flex flex-col gap-4 sm:flex-row sm:justify-between">
                     <button
                         type="button"
-                        @click="answer('Short Method')"
-                        class="rounded-lg bg-primary p-4 font-medium text-primary-foreground transition-opacity hover:opacity-90"
+                        @click="submitAnswer('Short Method')"
+                        class="rounded-lg border bg-blue-400 p-4 hover:bg-blue-300"
                     >
                         ⬅ Short Method
                     </button>
 
                     <button
                         type="button"
-                        class="rounded-lg bg-primary p-4 font-medium text-primary-foreground transition-opacity hover:opacity-90"
-                        @click="answer('Long Method')"
+                        class="rounded-lg border bg-blue-400 p-4 hover:bg-blue-300"
+                        @click="submitAnswer('Long Method')"
                     >
                         Long Method ➡
                     </button>
