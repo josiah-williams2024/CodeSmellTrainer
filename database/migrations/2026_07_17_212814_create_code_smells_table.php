@@ -23,6 +23,7 @@ return new class extends Migration
 
         Schema::table('decks', function (Blueprint $table) {
             $table->foreignIdFor(CodeSmell::class)
+                ->nullable()
                 ->constrained()
                 ->cascadeOnDelete();
         });

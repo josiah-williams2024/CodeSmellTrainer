@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             LongMethodGameSeeder::class,
             ClutterGameSeeder::class,
             DuplicationGameSeeder::class,
+            CodeSmellSeeder::class,
         ]);
     }
 }

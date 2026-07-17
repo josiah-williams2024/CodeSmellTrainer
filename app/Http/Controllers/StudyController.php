@@ -14,8 +14,8 @@ class StudyController extends Controller
      */
     public function index(): Response
     {
-        return Inertia::render('Study', [
-            'codeSmell' => CodeSmell::with('deck')->get(),
+        return Inertia::render('LearnCodeSmells', [
+            'codeSmells' => CodeSmell::with('deck')->get(),
         ]);
     }
 
