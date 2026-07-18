@@ -1,14 +1,13 @@
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
-import { LucideWrench, LayoutGrid , Video} from '@lucide/vue';
+import { LucideWrench, LayoutGrid, Video } from '@lucide/vue';
 import AppLogo from '@/components/AppLogo.vue';
-import NavFooter from '@/components/NavFooter.vue';
 import NavMain from '@/components/NavMain.vue';
-import NavUser from '@/components/NavUser.vue';
 import {
     Sidebar,
     SidebarContent,
-    SidebarFooter,
+    SidebarGroup,
+    SidebarGroupLabel,
     SidebarHeader,
     SidebarMenu,
     SidebarMenuButton,
@@ -25,7 +24,7 @@ const mainNavItems: NavItem[] = [
     },
 ];
 
-const footerNavItems: NavItem[] = [
+const resourceNavItems: NavItem[] = [
     {
         title: 'Code Smells Reference',
         href: 'https://refactoring.guru/refactoring/smells',
@@ -55,12 +54,30 @@ const footerNavItems: NavItem[] = [
 
         <SidebarContent>
             <NavMain :items="mainNavItems" />
-        </SidebarContent>
 
-        <SidebarFooter>
-            <NavFooter :items="footerNavItems" />
-            <NavUser />
-        </SidebarFooter>
+            <SidebarGroup class="px-2 py-0">
+                <SidebarGroupLabel>Resources</SidebarGroupLabel>
+
+                <SidebarMenu>
+                    <SidebarMenuItem
+                        v-for="item in resourceNavItems"
+                        :key="item.title"
+                    >
+                        <SidebarMenuButton as-child :tooltip="item.title">
+                            <a
+                                :href="item.href"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <component :is="item.icon" />
+                                <span>{{ item.title }}</span>
+                            </a>
+                        </SidebarMenuButton>
+                    </SidebarMenuItem>
+                </SidebarMenu>
+            </SidebarGroup>
+        </SidebarContent>
     </Sidebar>
+
     <slot />
 </template>
