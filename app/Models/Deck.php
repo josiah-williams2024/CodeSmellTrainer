@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Deck extends Model
@@ -17,5 +18,10 @@ class Deck extends Model
     public function gameResults(): HasMany
     {
         return $this->hasMany(GameResult::class);
+    }
+
+    public function codeSmell(): BelongsTo
+    {
+        return $this->belongsTo(CodeSmell::class);
     }
 }

@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { Head, Link } from '@inertiajs/vue3';
+import gameController from '@/actions/App/Http/Controllers/GameController';
 import statsController from '@/actions/App/Http/Controllers/StatsController';
-import { dashboard, game, learncodesmells, leaderboard } from '@/routes';
+import studyController from '@/actions/App/Http/Controllers/StudyController';
+import { dashboard, leaderboard } from '@/routes';
 
 defineOptions({
     layout: {
@@ -26,7 +28,7 @@ defineOptions({
 
         <section class="mx-auto grid max-w-5xl gap-6">
             <Link
-                :href="game()"
+                :href="gameController.index()"
                 class="flex h-72 flex-col justify-center rounded-2xl border border-border bg-card p-8 shadow-lg transition-all duration-200 hover:-translate-y-1 hover:border-primary hover:shadow-xl"
             >
                 <h2 class="mt-4 text-3xl font-bold text-card-foreground">
@@ -78,7 +80,7 @@ defineOptions({
             </div>
 
             <Link
-                :href="learncodesmells()"
+                :href="studyController.index()"
                 class="flex h-72 flex-col justify-center rounded-2xl border border-border bg-card p-8 shadow-lg transition-all duration-200 hover:-translate-y-1 hover:border-primary hover:shadow-xl"
             >
                 <h2 class="mt-4 text-3xl font-bold text-card-foreground">

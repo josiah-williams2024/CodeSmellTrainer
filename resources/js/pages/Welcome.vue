@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { Head, Link } from '@inertiajs/vue3';
+import gameController from '@/actions/App/Http/Controllers/GameController';
+import studyController from '@/actions/App/Http/Controllers/StudyController';
 import { dashboard, login } from '@/routes';
-import { register, game, learncodesmells } from '@/routes';
+import { register } from '@/routes';
 </script>
 
 <template>
@@ -65,14 +67,14 @@ import { register, game, learncodesmells } from '@/routes';
 
                     <div class="mt-8 flex justify-center gap-4">
                         <Link
-                            :href="game()"
+                            :href="gameController.index()"
                             class="flex w-48 items-center justify-center rounded-lg bg-primary px-6 py-3 font-medium text-primary-foreground transition hover:opacity-80"
                         >
                             Play Game
                         </Link>
 
                         <Link
-                            :href="learncodesmells()"
+                            :href="studyController.index()"
                             class="flex w-48 items-center justify-center rounded-lg bg-primary px-6 py-3 font-medium text-primary-foreground transition hover:opacity-80"
                         >
                             Study Code Smells

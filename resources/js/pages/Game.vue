@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Head, Link } from '@inertiajs/vue3';
-import { deckLongMethod, deckDuplication, deckClutter } from '@/routes';
+import gameController from '@/actions/App/Http/Controllers/GameController';
 </script>
 
 <template>
@@ -16,7 +16,7 @@ import { deckLongMethod, deckDuplication, deckClutter } from '@/routes';
             class="mx-auto grid max-w-6xl gap-6 md:grid-cols-2 lg:grid-cols-3"
         >
             <Link
-                :href="deckLongMethod()"
+                :href="gameController.show(1)"
                 class="flex h-64 flex-col rounded-xl border-2 border-border bg-card p-6 shadow-lg transition hover:border-primary hover:shadow-xl"
             >
                 <h2 class="text-2xl font-semibold text-card-foreground">
@@ -34,7 +34,7 @@ import { deckLongMethod, deckDuplication, deckClutter } from '@/routes';
             </Link>
 
             <Link
-                :href="deckClutter()"
+                :href="gameController.show(2)"
                 class="flex h-64 flex-col rounded-xl border-2 border-border bg-card p-6 shadow-lg transition hover:border-primary hover:shadow-xl"
             >
                 <h2 class="text-2xl font-semibold text-card-foreground">
@@ -52,7 +52,7 @@ import { deckLongMethod, deckDuplication, deckClutter } from '@/routes';
             </Link>
 
             <Link
-                :href="deckDuplication()"
+                :href="gameController.show(3)"
                 class="flex h-64 flex-col rounded-xl border-2 border-border bg-card p-6 shadow-lg transition hover:border-primary hover:shadow-xl"
             >
                 <h2 class="text-2xl font-semibold text-card-foreground">
