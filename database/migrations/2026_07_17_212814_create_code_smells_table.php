@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('summary');
             $table->longText('content');
+            $table->string('reference_url')->nullable();
             $table->timestamps();
         });
 

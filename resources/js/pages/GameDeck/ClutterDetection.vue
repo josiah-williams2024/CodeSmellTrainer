@@ -2,7 +2,7 @@
 import { Head, Link } from '@inertiajs/vue3';
 import { computed, ref, onMounted, onUnmounted } from 'vue';
 import gameController from '@/actions/App/Http/Controllers/GameController';
-import { game } from '@/routes';
+
 
 const currentCardIndex = ref(0);
 const score = ref(0);
@@ -228,7 +228,7 @@ const formattedTime = computed(() => {
                 </button>
 
                 <Link
-                    :href="game()"
+                    :href="gameController.index()"
                     class="w-40 rounded-lg bg-primary p-4 text-center font-medium text-primary-foreground transition-opacity hover:opacity-90"
                 >
                     Pick New Deck

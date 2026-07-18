@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Deck;
 use App\Models\GameResult;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class GameController extends Controller
 {
@@ -12,7 +15,10 @@ class GameController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('Game', [
+            'decks' => Deck::all(),
+        ]);
+
     }
 
     /**
@@ -52,9 +58,20 @@ class GameController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Deck $deck): Response
     {
-        //
+        $deck->load('cards');
+
+        $page = match ($deck->id) {
+            1 => 'GameDeck/LongMethod',
+            2 => 'GameDeck/ClutterDetection',
+            3 => 'GameDeck/DuplicationDetection',
+            default => abort(404),
+        };
+
+        return Inertia::render($page, [
+            'deck' => $deck,
+        ]);
     }
 
     /**
