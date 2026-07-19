@@ -3,7 +3,8 @@ import { Head, Link } from '@inertiajs/vue3';
 import gameController from '@/actions/App/Http/Controllers/GameController';
 import statsController from '@/actions/App/Http/Controllers/StatsController';
 import studyController from '@/actions/App/Http/Controllers/StudyController';
-import { dashboard, leaderboard } from '@/routes';
+import leader
+import { dashboard } from '@/routes';
 
 defineOptions({
     layout: {
@@ -63,7 +64,7 @@ defineOptions({
                 </Link>
 
                 <Link
-                    :href="leaderboard()"
+                    :href="leaderBoardController.index()"
                     class="flex h-56 flex-col justify-center rounded-2xl border border-border bg-card p-8 shadow-lg transition-all duration-200 hover:-translate-y-1 hover:border-primary hover:shadow-xl"
                 >
                     <h2 class="mt-4 text-2xl font-bold text-card-foreground">
