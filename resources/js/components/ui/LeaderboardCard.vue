@@ -23,7 +23,7 @@ defineProps<{
             <div
                 v-for="rank in 5"
                 :key="rank"
-                class="flex justify-between border-b pb-2"
+                class="flex justify-between pb-2"
             >
                 <template v-if="leaderboard[rank - 1]">
                     <span class="text-primary">
