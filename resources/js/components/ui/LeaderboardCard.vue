@@ -31,7 +31,7 @@ defineProps<{
                     </span>
 
                     <span class="font-medium text-card-foreground">
-                        {{ leaderboard[rank - 1].averageScore.toFixed(1) }}
+                        {{ leaderboard[rank - 1].averageScore.toFixed(2) }}
                     </span>
                 </template>
 

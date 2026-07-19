@@ -23,8 +23,8 @@ defineProps<{
         <div
             class="shawdow-lg mx-auto max-w-4xl rounded-2xl border border-border bg-card p-8"
         >
-            <header class="mb-8">
-                <h1 class="text-center text-3xl font-bold text-foreground"></h1>
+            <header class="mb-4">
+                <h1 class="text-center text-3xl font-bold text-foreground">Study Code Smells</h1>
             </header>
 
             <section class="space-y-6">
