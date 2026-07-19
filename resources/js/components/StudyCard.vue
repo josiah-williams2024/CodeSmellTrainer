@@ -37,7 +37,7 @@ defineProps<{
                 rel="noopener noreferrer"
                 class="flex-1 rounded-md bg-primary px-4 py-2 text-primary-foreground transition hover:opacity-90"
             >
-                Study
+                Learn More
             </a>
 
             <Link
