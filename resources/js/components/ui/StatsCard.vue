@@ -16,7 +16,7 @@ const props = defineProps<{
     }>();
 
     const formatStats = (value: number | null, suffix = '') => {
-        return value != null ? `${value}${suffix}` : '--';
+        return value != null ? `${value.toFixed(2)}${suffix}` : '--';
     }
 
 </script>
@@ -46,7 +46,7 @@ const props = defineProps<{
 
             <div class="flex justify-between">
                 <span class="text-primary">Average Score:</span>
-                <span class="font-medium text-card-foreground">{{formatStats(props.stats.averageScore, '/10')}}</span>
+                <span class="font-medium text-card-foreground">{{formatStats(props.stats.averageScore, '/10.0')}}</span>
             </div>
             <div class="flex justify-between">
                 <span class="text-primary">Average Time:</span>
