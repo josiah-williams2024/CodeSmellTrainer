@@ -3,9 +3,11 @@ import { Link } from '@inertiajs/vue3';
 import { LucideWrench, LayoutGrid, Video } from '@lucide/vue';
 import AppLogo from '@/components/AppLogo.vue';
 import NavMain from '@/components/NavMain.vue';
+import NavUser from '@/components/NavUser.vue';
 import {
     Sidebar,
     SidebarContent,
+    SidebarFooter,
     SidebarGroup,
     SidebarGroupLabel,
     SidebarHeader,
@@ -77,6 +79,10 @@ const resourceNavItems: NavItem[] = [
                 </SidebarMenu>
             </SidebarGroup>
         </SidebarContent>
+
+        <SidebarFooter>
+            <NavUser />
+        </SidebarFooter>
     </Sidebar>
 
     <slot />
