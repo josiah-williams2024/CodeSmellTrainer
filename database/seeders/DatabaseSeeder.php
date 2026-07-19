@@ -23,10 +23,10 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call([
+            CodeSmellSeeder::class,
             LongMethodGameSeeder::class,
             ClutterGameSeeder::class,
             DuplicationGameSeeder::class,
-            CodeSmellSeeder::class,
         ]);
     }
 }
