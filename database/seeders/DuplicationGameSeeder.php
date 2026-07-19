@@ -15,6 +15,7 @@ class DuplicationGameSeeder extends Seeder
         $deck = Deck::create([
             'name' => 'Duplication Code Detection',
             'description' => 'This deck will allow the user to get better at recognizing duplicate code.',
+            'code_smell_id' => '3',
         ]);
 
         $deck->cards()->createMany([
