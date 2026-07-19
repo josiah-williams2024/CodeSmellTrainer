@@ -10,7 +10,6 @@ Route::inertia('/', 'Welcome')->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::inertia('dashboard', 'Dashboard')->name('dashboard');
-    Route::inertia('leaderboard', [LeaderboardController::class, 'index'])->name('leaderboard.index');
     Route::inertia('learnCodeSmells', 'LearnCodeSmells')->name('learnCodeSmells');
 
     Route::get('game', [GameController::class, 'index'])->name('game.index');
@@ -23,6 +22,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('study', [StudyController::class, 'index'])->name('study.index');
 
+    Route::get('leaderboard', [LeaderboardController::class, 'index'])->name('leaderboard.index');
 });
 
 require __DIR__.'/settings.php';
