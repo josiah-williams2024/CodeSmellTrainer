@@ -29,8 +29,7 @@ TEXT,
             'content' => <<<'TEXT'
 Clutter is anything that adds noise without providing value. This includes dead code, unused variables, excessive comments, commented-out code, and inconsistent formatting.
 TEXT,
-            'reference_url' => 'https://refactoring.guru/smells/duplicate-code
-',
+            'reference_url' => 'https://refactoring.guru/smells/comments',
         ]);
 
         CodeSmell::query()->create([
@@ -40,7 +39,7 @@ TEXT,
             'content' => <<<'TEXT'
 Duplicate code occurs when the same logic is copied into multiple methods, classes, or files. Every duplicate increases maintenance because changes must be made in several places instead of one.
 TEXT,
-            'reference_url' => 'https://refactoring.guru/smells/comments',
+            'reference_url' => 'https://refactoring.guru/smells/duplicate-code',
         ]);
     }
 }
