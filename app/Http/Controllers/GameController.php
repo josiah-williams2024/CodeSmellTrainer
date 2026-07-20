@@ -62,6 +62,11 @@ class GameController extends Controller
     {
         $deck->load('cards');
 
+        $deck->setRelation(
+            'cards',
+            $deck->cards->shuffle()->values(),
+        );
+
         $page = match ($deck->id) {
             1 => 'GameDeck/LongMethod',
             2 => 'GameDeck/ClutterDetection',
