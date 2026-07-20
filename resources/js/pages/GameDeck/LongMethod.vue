@@ -119,16 +119,6 @@ const handleArrowKeys = (event: KeyboardEvent) => {
     }
 };
 
-const playAgain = () => {
-    currentCardIndex.value = 0;
-    score.value = 0;
-    finished.value = false;
-    questionsAnswered.value = 0;
-
-    elapsedSeconds.value = 0;
-
-    startTimer();
-};
 
 const formattedTime = computed(() => {
     const mins = Math.floor(elapsedSeconds.value / 60);
@@ -219,12 +209,12 @@ const formattedTime = computed(() => {
             </div>
 
             <div class="flex justify-center gap-4">
-                <button
+                <Link
                     class="w-40 rounded-lg bg-primary p-4 text-center font-medium text-primary-foreground transition-opacity hover:opacity-90"
-                    @click="playAgain()"
+                    :href="gameController.show(props.deck.id)"
                 >
                     Play Again
-                </button>
+                </Link>
 
                 <Link
                     :href="gameController.index()"
