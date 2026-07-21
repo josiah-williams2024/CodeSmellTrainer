@@ -2,6 +2,7 @@
 import { Head, Link } from '@inertiajs/vue3';
 import { computed, ref, onMounted, onUnmounted } from 'vue';
 import gameController from '@/actions/App/Http/Controllers/GameController';
+import { highlightCode } from '@/lib/shiki';
 
 const currentCardIndex = ref(0);
 const score = ref(0);
@@ -9,6 +10,7 @@ const finished = ref(false);
 const questionsAnswered = ref(0);
 const elapsedSeconds = ref(0);
 const gameEndpoint = gameController.store();
+const highlightedCards = ref<string[]>([]);
 
 let timer: number;
 
@@ -33,6 +35,13 @@ const startTimer = () => {
         elapsedSeconds.value++;
     }, 1000);
 };
+
+onMounted(async () => {
+    highlightedCards.value = await Promise.all(
+        props.deck.cards.map((card) => highlightCode(card.code_snippet)),
+    );
+});
+
 onMounted(() => {
     window.addEventListener('keydown', handleArrowKeys);
 
@@ -134,7 +143,7 @@ const formattedTime = computed(() => {
     >
         <article
             v-if="!finished"
-            class="flex h-[85vh] w-full max-w-7xl flex-col rounded-xl border border-border bg-card p-4 shadow-xl md:p-8"
+            class="flex h-[92vh] w-full max-w-7xl flex-col rounded-xl border border-border bg-card p-4 shadow-xl md:p-8"
         >
             <header class="mb-6 text-center">
                 <h1 class="text-2xl font-bold text-card-foreground">
@@ -156,12 +165,10 @@ const formattedTime = computed(() => {
                     Time: {{ formattedTime }}
                 </p>
             </header>
-            <section class="flex-1 overflow-hidden">
-                <pre
-                    class="h-full overflow-auto rounded-lg border border-border bg-muted p-4 text-left font-mono text-[11px] text-card-foreground md:text-xs"
-                >
-            <code >{{ currentCard.code_snippet }}</code>
-            </pre>
+            <section
+                class="flex-1 overflow-auto rounded-lg border border-border bg-zinc-900"
+            >
+                <div v-html="highlightedCards[currentCardIndex]"></div>
             </section>
             <footer class="mt-6">
                 <nav class="flex flex-col gap-4 sm:flex-row sm:justify-between">
@@ -209,10 +216,10 @@ const formattedTime = computed(() => {
 
             <div class="flex justify-center gap-4">
                 <Link
-                class="w-40 rounded-lg bg-primary p-4 text-center font-medium text-primary-foreground transition-opacity hover:opacity-90"
-                :href="gameController.show(props.deck.id)"
+                    class="w-40 rounded-lg bg-primary p-4 text-center font-medium text-primary-foreground transition-opacity hover:opacity-90"
+                    :href="gameController.show(props.deck.id)"
                 >
-                Play Again
+                    Play Again
                 </Link>
 
                 <Link

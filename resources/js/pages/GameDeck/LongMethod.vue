@@ -2,12 +2,14 @@
 import { Head, Link } from '@inertiajs/vue3';
 import { computed, ref, onMounted, onUnmounted } from 'vue';
 import gameController from '@/actions/App/Http/Controllers/GameController';
+import { highlightCode } from '@/lib/shiki';
 
 const currentCardIndex = ref(0);
 const score = ref(0);
 const finished = ref(false);
 const questionsAnswered = ref(0);
 const elapsedSeconds = ref(0);
+const highlightedCards = ref<string[]>([]);
 const gameEndpoint = gameController.store();
 
 let timer: number;
@@ -33,6 +35,13 @@ const startTimer = () => {
         elapsedSeconds.value++;
     }, 1000);
 };
+
+onMounted(async () => {
+    highlightedCards.value = await Promise.all(
+        props.deck.cards.map((card) => highlightCode(card.code_snippet)),
+    );
+});
+
 onMounted(() => {
     window.addEventListener('keydown', handleArrowKeys);
 
@@ -119,7 +128,6 @@ const handleArrowKeys = (event: KeyboardEvent) => {
     }
 };
 
-
 const formattedTime = computed(() => {
     const mins = Math.floor(elapsedSeconds.value / 60);
     const secs = elapsedSeconds.value % 60;
@@ -157,12 +165,10 @@ const formattedTime = computed(() => {
                     Time: {{ formattedTime }}
                 </p>
             </header>
-            <section class="flex-1 overflow-hidden">
-                <pre
-                    class="h-full overflow-auto rounded-lg border border-border bg-muted p-4 text-left font-mono text-[11px] text-card-foreground md:text-xs"
-                >
-            <code>{{ currentCard.code_snippet }}</code>
-            </pre>
+            <section
+                class="flex-1 overflow-auto rounded-lg border border-border bg-zinc-900"
+            >
+                <div v-html="highlightedCards[currentCardIndex]"></div>
             </section>
             <footer class="mt-6">
                 <nav class="flex flex-col gap-4 sm:flex-row sm:justify-between">
