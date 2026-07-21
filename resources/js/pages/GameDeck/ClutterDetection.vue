@@ -2,7 +2,7 @@
 import { Head, Link } from '@inertiajs/vue3';
 import { computed, ref, onMounted, onUnmounted } from 'vue';
 import gameController from '@/actions/App/Http/Controllers/GameController';
-
+import { highlightCode } from '@/lib/shiki';
 
 const currentCardIndex = ref(0);
 const score = ref(0);
@@ -10,6 +10,7 @@ const finished = ref(false);
 const questionsAnswered = ref(0);
 const elapsedSeconds = ref(0);
 const gameEndpoint = gameController.store();
+const highlightedCards = ref<string[]>([]);
 
 let timer: number;
 
@@ -34,6 +35,13 @@ const startTimer = () => {
         elapsedSeconds.value++;
     }, 1000);
 };
+
+onMounted(async () => {
+    highlightedCards.value = await Promise.all(
+        props.deck.cards.map((card) => highlightCode(card.code_snippet)),
+    );
+});
+
 onMounted(() => {
     window.addEventListener('keydown', handleArrowKeys);
 
@@ -161,7 +169,7 @@ const formattedTime = computed(() => {
                 <pre
                     class="h-full overflow-auto rounded-lg border border-border bg-muted p-4 text-left font-mono text-[11px] text-card-foreground md:text-xs"
                 >
-            <code>{{ currentCard.code_snippet }}</code>
+             <div v-html="highlightedCards[currentCardIndex]"></div>
             </pre>
             </section>
             <footer class="mt-6">
@@ -210,10 +218,10 @@ const formattedTime = computed(() => {
 
             <div class="flex justify-center gap-4">
                 <Link
-                class="w-40 rounded-lg bg-primary p-4 text-center font-medium text-primary-foreground transition-opacity hover:opacity-90"
-                :href="gameController.show(props.deck.id)"
+                    class="w-40 rounded-lg bg-primary p-4 text-center font-medium text-primary-foreground transition-opacity hover:opacity-90"
+                    :href="gameController.show(props.deck.id)"
                 >
-                Play Again
+                    Play Again
                 </Link>
 
                 <Link
