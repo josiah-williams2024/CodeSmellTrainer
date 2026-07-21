@@ -165,12 +165,10 @@ const formattedTime = computed(() => {
                     Time: {{ formattedTime }}
                 </p>
             </header>
-            <section class="flex-1 overflow-hidden">
-                <pre
-                    class="h-full overflow-auto rounded-lg border border-border bg-muted p-4 text-left font-mono text-[11px] text-card-foreground md:text-xs"
-                >
-                    <div v-html="highlightedCards[currentCardIndex]"></div>
-            </pre>
+            <section
+                class="flex-1 overflow-auto rounded-lg border border-border bg-zinc-900"
+            >
+                <div v-html="highlightedCards[currentCardIndex]"></div>
             </section>
             <footer class="mt-6">
                 <nav class="flex flex-col gap-4 sm:flex-row sm:justify-between">
