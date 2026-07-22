@@ -40,9 +40,7 @@ onMounted(async () => {
     highlightedCards.value = await Promise.all(
         props.deck.cards.map((card) => highlightCode(card.code_snippet)),
     );
-});
 
-onMounted(() => {
     window.addEventListener('keydown', handleArrowKeys);
 
     startTimer();
@@ -138,51 +136,46 @@ const formattedTime = computed(() => {
 
 <template>
     <Head :title="props.deck.name"></Head>
-    <main
-        class="flex min-h-screen items-center justify-center bg-background p-2 md:p-4"
-    >
+    <main class="flex min-h-screen justify-center bg-background p-2">
         <article
             v-if="!finished"
-            class="flex h-[85vh] w-full max-w-7xl flex-col rounded-xl border border-border bg-card p-4 shadow-xl md:p-8"
+            class="flex h-[95vh] w-full max-w-screen-2xl flex-col"
         >
-            <header class="mb-6 text-center">
-                <h1 class="text-2xl font-bold text-card-foreground">
+            <header class="mb-3">
+                <h1 class="text-center text-3xl font-bold text-card-foreground">
                     {{ props.deck.name }}
                 </h1>
 
-                <p class="text-sm text-card-foreground">Score : {{ score }}</p>
-
-                <p class="text-sm text-card-foreground">
-                    Accuracy {{ accuracy }}%
-                </p>
-
-                <p class="text-sm text-card-foreground">
-                    Card {{ currentCardIndex + 1 }} /
-                    {{ props.deck.cards.length }}
-                </p>
-
-                <p class="text-sm text-card-foreground">
-                    Time: {{ formattedTime }}
-                </p>
+                <div
+                    class="mt-2 flex flex-wrap justify-center gap-6 text-sm text-muted-foreground"
+                >
+                    <span>Score: {{ score }}</span>
+                    <span>Accuracy: {{ accuracy }}%</span>
+                    <span>
+                        Card {{ currentCardIndex + 1 }} /
+                        {{ props.deck.cards.length }}
+                    </span>
+                    <span>Time: {{ formattedTime }}</span>
+                </div>
             </header>
             <section
-                class="flex-1 overflow-auto rounded-lg border border-border bg-zinc-900"
+                class="flex-1 overflow-x-hidden overflow-y-auto rounded-lg border border-border bg-zinc-900"
             >
                 <div v-html="highlightedCards[currentCardIndex]"></div>
             </section>
-            <footer class="mt-6">
-                <nav class="flex flex-col gap-4 sm:flex-row sm:justify-between">
+            <footer class="mt-3">
+                <nav class="flex justify-between gap-4">
                     <button
                         type="button"
                         @click="submitAnswer('Clean')"
-                        class="rounded-lg bg-primary p-4 font-medium text-primary-foreground transition-opacity hover:opacity-90"
+                        class="rounded-lg bg-primary px-6 py-4 font-medium text-primary-foreground transition-opacity hover:opacity-90"
                     >
                         ⬅ Clean
                     </button>
 
                     <button
                         type="button"
-                        class="rounded-lg bg-primary p-4 font-medium text-primary-foreground transition-opacity hover:opacity-90"
+                        class="rounded-lg bg-primary px-6 py-4 font-medium text-primary-foreground transition-opacity hover:opacity-90"
                         @click="submitAnswer('Clutter')"
                     >
                         Clutter ➡
