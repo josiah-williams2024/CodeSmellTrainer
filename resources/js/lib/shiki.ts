@@ -10,7 +10,7 @@ export async function highlightCode(code: string) {
                     node.properties.style = `
                         margin:0;
                         padding:12px;
-                        font-size:11px;
+                        font-size:12.5px;
                         line-height:1.3;
                     `;
                 },
