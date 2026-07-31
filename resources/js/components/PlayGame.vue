@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { Link } from '@inertiajs/vue3';
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 import gameController from '@/actions/App/Http/Controllers/GameController';
 import { highlightCode } from '@/lib/shiki';
+import GameResults from './GameResults.vue';
 
 type Card = {
     id: number;
@@ -190,45 +190,12 @@ onUnmounted(() => {
             </footer>
         </article>
 
-        <article
+        <GameResults
             v-else
-            class="flex h-[85vh] w-full max-w-7xl flex-col rounded-xl border border-border bg-card p-4 shadow-xl md:p-8"
-        >
-            <div
-                class="flex flex-1 flex-col items-center justify-center text-center"
-            >
-                <h1 class="mb-4 text-4xl font-bold text-card-foreground">
-                    Deck Complete
-                </h1>
-
-                <p class="text-xl text-muted-foreground">
-                    Score: {{ score }} / {{ deck.cards.length }}
-                </p>
-
-                <p class="text-xl text-muted-foreground">
-                    Accuracy: {{ accuracy }}%
-                </p>
-
-                <p class="text-xl text-muted-foreground">
-                    Time: {{ formattedTime }}
-                </p>
-            </div>
-
-            <div class="flex justify-center gap-4">
-                <Link
-                    :href="gameController.show(deck.id)"
-                    class="w-40 rounded-lg bg-primary p-4 text-center font-medium text-primary-foreground transition-opacity hover:opacity-90"
-                >
-                    Play Again
-                </Link>
-
-                <Link
-                    :href="gameController.index()"
-                    class="w-40 rounded-lg bg-primary p-4 text-center font-medium text-primary-foreground transition-opacity hover:opacity-90"
-                >
-                    Pick New Deck
-                </Link>
-            </div>
-        </article>
+            :deck="deck"
+            :accuracy="accuracy"
+            :score="score"
+            :formatted-time="formattedTime"
+        />
     </main>
 </template>
