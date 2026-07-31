@@ -1,6 +1,16 @@
 <script setup lang="ts">
 import { Head, Link } from '@inertiajs/vue3';
 import gameController from '@/actions/App/Http/Controllers/GameController';
+
+type Deck = {
+    id: number;
+    name: string;
+    description: string;
+};
+
+defineProps<{
+    decks: Deck[];
+}>();
 </script>
 
 <template>
@@ -16,52 +26,17 @@ import gameController from '@/actions/App/Http/Controllers/GameController';
             class="mx-auto grid max-w-6xl gap-6 md:grid-cols-2 lg:grid-cols-3"
         >
             <Link
-                :href="gameController.show(1)"
+                v-for="deck in decks"
+                :key="deck.id"
+                :href="gameController.show(deck.id)"
                 class="flex h-64 flex-col rounded-xl border-2 border-border bg-card p-6 shadow-lg transition hover:border-primary hover:shadow-xl"
             >
                 <h2 class="text-2xl font-semibold text-card-foreground">
-                    Long Method
+                    {{ deck.name }}
                 </h2>
 
                 <p class="mt-3 text-muted-foreground">
-                    Identify methods that are too long and should be broken into
-                    smaller pieces.
-                </p>
-
-                <span class="mt-6 font-medium text-primary">
-                    Start Deck →
-                </span>
-            </Link>
-
-            <Link
-                :href="gameController.show(2)"
-                class="flex h-64 flex-col rounded-xl border-2 border-border bg-card p-6 shadow-lg transition hover:border-primary hover:shadow-xl"
-            >
-                <h2 class="text-2xl font-semibold text-card-foreground">
-                    Clutter
-                </h2>
-
-                <p class="mt-3 text-muted-foreground">
-                    Learn to spot unnecessary code, dead code, and confusing
-                    implementations.
-                </p>
-
-                <span class="mt-6 font-medium text-primary">
-                    Start Deck →
-                </span>
-            </Link>
-
-            <Link
-                :href="gameController.show(3)"
-                class="flex h-64 flex-col rounded-xl border-2 border-border bg-card p-6 shadow-lg transition hover:border-primary hover:shadow-xl"
-            >
-                <h2 class="text-2xl font-semibold text-card-foreground">
-                    Duplication
-                </h2>
-
-                <p class="mt-3 text-muted-foreground">
-                    Identify repeated logic and recognize opportunities to
-                    refactor duplicate code.
+                    {{ deck.description }}
                 </p>
 
                 <span class="mt-6 font-medium text-primary">

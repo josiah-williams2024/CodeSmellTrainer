@@ -36,11 +36,17 @@ class LeaderboardController extends Controller
                     ];
                 });
 
-            $leaderboards[] = $leaderboard;
+            $leaderboards[] = [
+                'deck' => [
+                    'id' => $deck->id,
+                    'name' => $deck->name,
+                ],
+                'leaderboard' => $leaderboard,
+            ];
         }
 
         return Inertia::render('Leaderboard', [
-            'leaderboard' => $leaderboards,
+            'leaderboards' => $leaderboards,
         ]);
     }
 
