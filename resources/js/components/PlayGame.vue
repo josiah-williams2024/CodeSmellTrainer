@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 import gameController from '@/actions/App/Http/Controllers/GameController';
+import { useGame } from '@/composables/useGame';
 import { highlightCode } from '@/lib/shiki';
 import GameResults from './GameResults.vue';
 
@@ -24,43 +25,23 @@ const props = defineProps<{
     rightAnswer: string;
 }>();
 
-const currentCardIndex = ref(0);
-const score = ref(0);
-const finished = ref(false);
-const questionsAnswered = ref(0);
-const elapsedSeconds = ref(0);
 const highlightedCards = ref<string[]>([]);
-
 const gameEndpoint = gameController.store();
 
-let timer: number;
+const {
+    currentCardIndex,
+    score,
+    questionsAnswered,
+    elapsedSeconds,
+    finished,
+    accuracy,
+    formattedTime,
+    answerQuestion,
+} = useGame(props.deck.cards.length);
 
 const currentCard = computed(() => {
     return props.deck.cards[currentCardIndex.value];
 });
-
-const accuracy = computed(() => {
-    if (questionsAnswered.value === 0) {
-        return 0;
-    }
-
-    return Math.round((score.value / questionsAnswered.value) * 100);
-});
-
-const formattedTime = computed(() => {
-    const mins = Math.floor(elapsedSeconds.value / 60);
-    const secs = elapsedSeconds.value % 60;
-
-    return `${mins}:${secs.toString().padStart(2, '0')}`;
-});
-
-const startTimer = () => {
-    clearInterval(timer);
-
-    timer = window.setInterval(() => {
-        elapsedSeconds.value++;
-    }, 1000);
-};
 
 const saveGameResult = async () => {
     try {
@@ -91,22 +72,19 @@ const saveGameResult = async () => {
 };
 
 const submitAnswer = (choice: string) => {
-    questionsAnswered.value++;
-
-    if (choice === currentCard.value.answer) {
-        score.value++;
-    }
-
-    if (currentCardIndex.value === props.deck.cards.length - 1) {
-        finished.value = true;
-        clearInterval(timer);
-
-        void saveGameResult();
-
+    if (!currentCard.value || finished.value) {
         return;
     }
 
-    currentCardIndex.value++;
+    const isCorrect = choice === currentCard.value.answer;
+    const isLastQuestion =
+        questionsAnswered.value + 1 >= props.deck.cards.length;
+
+    answerQuestion(isCorrect);
+
+    if (isLastQuestion) {
+        void saveGameResult();
+    }
 };
 
 const handleArrowKeys = (event: KeyboardEvent) => {
@@ -129,16 +107,12 @@ onMounted(async () => {
     );
 
     window.addEventListener('keydown', handleArrowKeys);
-
-    startTimer();
 });
 
 onUnmounted(() => {
     window.removeEventListener('keydown', handleArrowKeys);
-    clearInterval(timer);
 });
 </script>
-
 <template>
     <main class="flex min-h-screen justify-center bg-background p-2">
         <article
