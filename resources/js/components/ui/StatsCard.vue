@@ -11,7 +11,6 @@ type DeckStats = {
 }
 
 const props = defineProps<{
-        title: string;
         stats: DeckStats;
     }>();
 
@@ -25,7 +24,7 @@ const props = defineProps<{
     <article
         class="flex h-64 flex-col rounded-xl border-2 border-primary bg-card p-6 shadow-xl"    >
         <h2  class="mb-3 text-2xl font-semibold">
-            {{props.title}}
+            {{props.stats.name}}
         </h2>
 
         <div class="space-y-3">
