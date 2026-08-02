@@ -19,20 +19,25 @@ defineOptions({
 </script>
 
 <template>
-    <Head title="Dashboard"></Head>
-    <main class="min-h-screen bg-background p-8">
-        <header class="mb-10">
-            <h1 class="text-center text-4xl font-bold text-foreground">
+    <Head title="Dashboard" />
+
+    <main class="min-h-screen bg-background p-4 sm:p-6 lg:p-8">
+        <header class="mb-8 sm:mb-10">
+            <h1
+                class="text-center text-3xl font-bold text-foreground sm:text-4xl"
+            >
                 Code Smell Trainer
             </h1>
         </header>
 
-        <section class="mx-auto grid max-w-5xl gap-6">
+        <section class="mx-auto grid max-w-5xl gap-4 sm:gap-6">
             <Link
                 :href="gameController.index()"
-                class="flex h-72 flex-col justify-center rounded-2xl border border-border bg-card p-8 shadow-lg transition-all duration-200 hover:-translate-y-1 hover:border-primary hover:shadow-xl"
+                class="flex min-h-64 flex-col justify-center rounded-2xl border border-border bg-card p-6 shadow-lg transition-all duration-200 hover:-translate-y-1 hover:border-primary hover:shadow-xl sm:p-8"
             >
-                <h2 class="mt-4 text-3xl font-bold text-card-foreground">
+                <h2
+                    class="mt-4 text-2xl font-bold text-card-foreground sm:text-3xl"
+                >
                     Play Game
                 </h2>
 
@@ -45,12 +50,14 @@ defineOptions({
                 </span>
             </Link>
 
-            <div class="grid grid-cols-2 gap-6">
+            <div class="grid gap-4 sm:gap-6 md:grid-cols-2">
                 <Link
                     :href="statsController.index()"
-                    class="flex h-56 flex-col justify-center rounded-2xl border border-border bg-card p-8 shadow-lg transition-all duration-200 hover:-translate-y-1 hover:border-primary hover:shadow-xl"
+                    class="flex min-h-56 flex-col justify-center rounded-2xl border border-border bg-card p-6 shadow-lg transition-all duration-200 hover:-translate-y-1 hover:border-primary hover:shadow-xl sm:p-8"
                 >
-                    <h2 class="mt-4 text-2xl font-bold text-card-foreground">
+                    <h2
+                        class="mt-4 text-xl font-bold text-card-foreground sm:text-2xl"
+                    >
                         Statistics
                     </h2>
 
@@ -65,15 +72,18 @@ defineOptions({
 
                 <Link
                     :href="leaderboardController.index()"
-                    class="flex h-56 flex-col justify-center rounded-2xl border border-border bg-card p-8 shadow-lg transition-all duration-200 hover:-translate-y-1 hover:border-primary hover:shadow-xl"
+                    class="flex min-h-56 flex-col justify-center rounded-2xl border border-border bg-card p-6 shadow-lg transition-all duration-200 hover:-translate-y-1 hover:border-primary hover:shadow-xl sm:p-8"
                 >
-                    <h2 class="mt-4 text-2xl font-bold text-card-foreground">
+                    <h2
+                        class="mt-4 text-xl font-bold text-card-foreground sm:text-2xl"
+                    >
                         Leaderboard
                     </h2>
 
                     <p class="mt-2 text-muted-foreground">
                         Compare your score with other players.
                     </p>
+
                     <span class="mt-6 font-medium text-primary">
                         View Leaderboard →
                     </span>
@@ -82,9 +92,11 @@ defineOptions({
 
             <Link
                 :href="studyController.index()"
-                class="flex h-72 flex-col justify-center rounded-2xl border border-border bg-card p-8 shadow-lg transition-all duration-200 hover:-translate-y-1 hover:border-primary hover:shadow-xl"
+                class="flex min-h-64 flex-col justify-center rounded-2xl border border-border bg-card p-6 shadow-lg transition-all duration-200 hover:-translate-y-1 hover:border-primary hover:shadow-xl sm:p-8"
             >
-                <h2 class="mt-4 text-3xl font-bold text-card-foreground">
+                <h2
+                    class="mt-4 text-2xl font-bold text-card-foreground sm:text-3xl"
+                >
                     Study Code Smells
                 </h2>
 

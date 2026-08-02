@@ -8,14 +8,15 @@ import { register } from '@/routes';
 
 <template>
     <Head title="Home" />
+
     <div
-        class="flex min-h-screen flex-col items-center bg-background p-6 text-foreground lg:justify-center lg:p-8"
+        class="flex min-h-screen flex-col items-center bg-background p-4 text-foreground sm:p-6 lg:justify-center lg:p-8"
     >
         <div class="w-full max-w-6xl">
             <main
-                class="rounded-xl border border-border bg-card p-12 shadow-lg"
+                class="rounded-xl border border-border bg-card p-6 shadow-lg sm:p-8 lg:p-12"
             >
-                <nav class="flex items-center justify-between gap-4">
+                <nav class="flex flex-wrap items-center justify-between gap-4">
                     <Link href="/" class="flex items-center gap-4">
                         <img
                             src="/logo.svg"
@@ -39,25 +40,28 @@ import { register } from '@/routes';
                     >
                         Dashboard
                     </Link>
+
                     <template v-else>
-                        <div class="flex items-center gap-4">
+                        <div class="flex items-center gap-3">
                             <Link
                                 :href="login()"
-                                class="inline-flex items-center rounded-md border border-border px-5 py-2 text-sm font-medium text-card-foreground transition-colors hover:border-primary hover:text-primary"
+                                class="inline-flex items-center justify-center rounded-md border border-border px-5 py-2 text-sm font-medium text-card-foreground transition-colors hover:border-primary hover:text-primary"
                             >
                                 Log in
                             </Link>
+
                             <Link
                                 :href="register()"
-                                class="inline-flex items-center rounded-md border border-border px-5 py-2 text-sm font-medium text-card-foreground transition-colors hover:border-primary hover:text-primary"
+                                class="inline-flex items-center justify-center rounded-md border border-border px-5 py-2 text-sm font-medium text-card-foreground transition-colors hover:border-primary hover:text-primary"
                             >
                                 Register
                             </Link>
                         </div>
                     </template>
                 </nav>
+
                 <section class="text-center">
-                    <h1 class="text-5xl font-bold text-foreground">
+                    <h1 class="text-4xl font-bold text-foreground sm:text-5xl">
                         Code Smell Trainer
                     </h1>
 
@@ -65,24 +69,28 @@ import { register } from '@/routes';
                         Learn to recognize code smells faster.
                     </p>
 
-                    <div class="mt-8 flex justify-center gap-4">
+                    <div
+                        class="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
+                    >
                         <Link
                             :href="gameController.index()"
-                            class="flex w-48 items-center justify-center rounded-lg bg-primary px-6 py-3 font-medium text-primary-foreground transition hover:opacity-80"
+                            class="flex w-56 items-center justify-center rounded-lg bg-primary px-6 py-3 font-medium text-primary-foreground transition hover:opacity-80"
                         >
                             Play Game
                         </Link>
 
                         <Link
                             :href="studyController.index()"
-                            class="flex w-48 items-center justify-center rounded-lg bg-primary px-6 py-3 font-medium text-primary-foreground transition hover:opacity-80"
+                            class="flex w-56 items-center justify-center rounded-lg bg-primary px-6 py-3 font-medium text-primary-foreground transition hover:opacity-80"
                         >
                             Study Code Smells
                         </Link>
                     </div>
                 </section>
+
                 <hr class="my-12 border-t border-border" />
-                <section class="mt-16">
+
+                <section class="mt-12 sm:mt-16">
                     <h2
                         class="mb-8 text-center text-3xl font-bold text-foreground"
                     >
@@ -94,6 +102,7 @@ import { register } from '@/routes';
                             class="rounded-xl border border-border bg-card p-6 text-center shadow-sm"
                         >
                             <h3 class="mb-2 text-lg font-semibold">1. Study</h3>
+
                             <p class="text-muted-foreground">
                                 Learn what each code smell is and why it
                                 matters.
@@ -101,20 +110,22 @@ import { register } from '@/routes';
                         </div>
 
                         <div
-                            class="rounded-xl border border-border bg-card p-6 text-center shadow-sm "
+                            class="rounded-xl border border-border bg-card p-6 text-center shadow-sm"
                         >
                             <h3 class="mb-2 text-lg font-semibold">
                                 2. Choose a Deck
                             </h3>
+
                             <p class="text-muted-foreground">
                                 Pick a deck such as Long Method or Large Class.
                             </p>
                         </div>
 
                         <div
-                            class="rounded-xl border border-border bg-card p-6 text-center shadow-sm "
+                            class="rounded-xl border border-border bg-card p-6 text-center shadow-sm"
                         >
                             <h3 class="mb-2 text-lg font-semibold">3. Play</h3>
+
                             <p class="text-muted-foreground">
                                 Identify code smells as quickly and accurately
                                 as possible.
@@ -127,6 +138,7 @@ import { register } from '@/routes';
                             <h3 class="mb-2 text-lg font-semibold">
                                 4. Improve
                             </h3>
+
                             <p class="text-muted-foreground">
                                 Track your score and become faster over time.
                             </p>

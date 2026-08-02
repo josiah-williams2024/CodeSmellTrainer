@@ -19,23 +19,19 @@ defineProps<{
 
 <template>
     <Head title="Stats"></Head>
-    <main class="min-h-screen bg-background md:p-6 lg:p-8">
-        <header class="mb-8">
-            <h1 class="text-center text-3xl font-bold text-foreground">
+    <main class="min-h-screen bg-background p-4 sm:p-6 lg:p-8">
+        <header class="mb-6 sm:mb-8">
+            <h1
+                class="text-center text-2xl font-bold text-foreground sm:text-3xl"
+            >
                 Deck Stats
             </h1>
         </header>
-
         <section
             class="mx-auto grid max-w-6xl gap-6 md:grid-cols-2 lg:grid-cols-3"
         >
-            <StatsCard
-                v-for="stat in stats"
-                :key="stat.id"
-                :stats="stat"
-            />
+            <StatsCard v-for="stat in stats" :key="stat.id" :stats="stat" />
         </section>
     </main>
 </template>
 
-<style scoped></style>
