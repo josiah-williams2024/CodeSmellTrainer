@@ -4,21 +4,37 @@ namespace Database\Seeders;
 
 use App\Models\Deck;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use RuntimeException;
 
-class DuplicationGameSeeder extends Seeder
+class UpdateClutterAndDuplicationCardsSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        $deck = Deck::create([
+        DB::transaction(function (): void {
+            $this->updateDuplicationDeck();
+            $this->updateClutterDeck();
+        });
+    }
+
+    private function updateDuplicationDeck(): void
+    {
+        $deck = Deck::query()
+            ->where('code_smell_id', 3)
+            ->first();
+
+        if (! $deck) {
+            throw new RuntimeException(
+                'The Duplication Code Detection deck could not be found.'
+            );
+        }
+
+        $deck->update([
             'name' => 'Duplication Code Detection',
             'description' => 'This deck will allow the user to get better at recognizing duplicate code.',
-            'code_smell_id' => '3',
         ]);
 
-        $deck->cards()->createMany([
+        $cards = [
             [
                 'title' => 'Duplicate Order Total Calculation',
                 'explanation' => 'The order total calculation has been copied instead of extracted into a reusable method.',
@@ -184,7 +200,6 @@ public function notifyCustomer(Order $order): void
         'notified' => true,
     ]);
 
-
     Mail::to($order->customer_email)
         ->send(new OrderReadyMail($order));
 
@@ -213,7 +228,8 @@ public function calculateTotal(Order $order): float
 }
 CODE,
                 'answer' => 'Not Duplicate Code',
-            ],[
+            ],
+            [
                 'title' => 'Register Customer',
                 'explanation' => 'Validation occurs once and is not repeated elsewhere in the method.',
                 'code_snippet' => <<<'CODE'
@@ -229,7 +245,8 @@ public function register(array $data): User
 }
 CODE,
                 'answer' => 'Not Duplicate Code',
-            ],[
+            ],
+            [
                 'title' => 'Send Welcome Email',
                 'explanation' => 'The email is sent once without any repeated logic.',
                 'code_snippet' => <<<'CODE'
@@ -242,7 +259,8 @@ public function sendWelcome(User $user): void
 }
 CODE,
                 'answer' => 'Not Duplicate Code',
-            ],[
+            ],
+            [
                 'title' => 'Generate Daily Report',
                 'explanation' => 'The report is built a single time with no copied sections.',
                 'code_snippet' => <<<'CODE'
@@ -261,7 +279,8 @@ public function generateReport(): void
 }
 CODE,
                 'answer' => 'Not Duplicate Code',
-            ],[
+            ],
+            [
                 'title' => 'Assign User Role',
                 'explanation' => 'The role assignment logic exists in only one place.',
                 'code_snippet' => <<<'CODE'
@@ -278,6 +297,236 @@ public function assignRole(User $user): void
 CODE,
                 'answer' => 'Not Duplicate Code',
             ],
+        ];
+
+        $this->updateCards($deck, $cards);
+    }
+
+    private function updateClutterDeck(): void
+    {
+        $deck = Deck::query()
+            ->where('code_smell_id', 2)
+            ->first();
+
+        if (! $deck) {
+            throw new RuntimeException(
+                'The Clutter Code Detection deck could not be found.'
+            );
+        }
+
+        $deck->update([
+            'name' => 'Clutter Code Detection',
+            'description' => 'This deck will allow the user to get better at recognizing excessive and unnecessary clutter.',
         ]);
+
+        $cards = [
+            [
+                'title' => 'Add Two Numbers',
+                'explanation' => 'A simple method buried beneath excessive comments.',
+                'code_snippet' => <<<'CODE'
+///////////////////////////////////////////////////////////
+// This method adds two numbers together.
+//
+// It receives two integers.
+//
+// The first integer is called $a.
+//
+// The second integer is called $b.
+//
+// The numbers are added together.
+//
+// The result is returned.
+//
+// End of documentation.
+///////////////////////////////////////////////////////////
+public function add(int $a, int $b): int
+{
+    return $a + $b;
+}
+CODE,
+                'answer' => 'Clutter',
+            ],
+            [
+                'title' => 'User Login',
+                'explanation' => 'Comments narrate every obvious step.',
+                'code_snippet' => <<<'CODE'
+///////////////////////////////////////////////////////////
+// Login Process
+//
+// Check if the user exists.
+//
+// If the user exists, log them in.
+//
+// After logging them in, redirect them.
+//
+// End of process.
+//
+// Do not remove these comments.
+//
+// Thank you.
+///////////////////////////////////////////////////////////
+public function login(User $user): RedirectResponse
+{
+    Auth::login($user);
+
+    return redirect('/dashboard');
+}
+CODE,
+                'answer' => 'Clutter',
+            ],
+            [
+                'title' => 'Calculate Tax',
+                'explanation' => 'The comments are longer than the implementation.',
+                'code_snippet' => <<<'CODE'
+///////////////////////////////////////////////////////////
+// Tax Calculation
+//
+// Receive the subtotal.
+//
+// Multiply by the tax rate.
+//
+// Return the calculated amount.
+//
+// This has been here since 2020.
+//
+// End.
+///////////////////////////////////////////////////////////
+public function calculateTax(float $subtotal): float
+{
+    return $subtotal * 0.13;
+}
+CODE,
+                'answer' => 'Clutter',
+            ],
+            [
+                'title' => 'Format Username',
+                'explanation' => 'The code is simple but overwhelmed by comments.',
+                'code_snippet' => <<<'CODE'
+///////////////////////////////////////////////////////////
+// Username Formatting
+//
+// Remove whitespace.
+//
+// Convert to lowercase.
+//
+// Return the result.
+//
+// Formatting complete.
+//
+// End of comments.
+///////////////////////////////////////////////////////////
+public function formatUsername(string $name): string
+{
+    return strtolower(trim($name));
+}
+CODE,
+                'answer' => 'Clutter',
+            ],
+            [
+                'title' => 'Check Adult',
+                'explanation' => 'An excessive comment block for one comparison.',
+                'code_snippet' => <<<'CODE'
+///////////////////////////////////////////////////////////
+// Age Verification
+//
+// Determine if the user is an adult.
+//
+// Adults are 18 or older.
+//
+// Return true if adult.
+//
+// Return false otherwise.
+//
+// End.
+///////////////////////////////////////////////////////////
+public function isAdult(int $age): bool
+{
+    return $age >= 18;
+}
+CODE,
+                'answer' => 'Clutter',
+            ],
+            [
+                'title' => 'Business Rule',
+                'explanation' => 'The comment explains a business rule that is not obvious from the implementation.',
+                'code_snippet' => <<<'CODE'
+public function calculateShipping(float $subtotal): float
+{
+    if ($subtotal >= 100) {
+        return 0;
+    }
+
+    return 15;
+}
+CODE,
+                'answer' => 'Clean',
+            ],
+            [
+                'title' => 'Legacy System Workaround',
+                'explanation' => 'The comment explains why an unusual condition exists.',
+                'code_snippet' => <<<'CODE'
+public function isSuccessful(array $response): bool
+{
+    return $response['status'] !== '0';
+}
+CODE,
+                'answer' => 'Clean',
+            ],
+            [
+                'title' => 'Helpful TODO',
+                'explanation' => 'A TODO identifies future work rather than narrating the code.',
+                'code_snippet' => <<<'CODE'
+public function generateToken(): string
+{
+    return bin2hex(random_bytes(32));
+}
+CODE,
+                'answer' => 'Clean',
+            ],
+            [
+                'title' => 'Algorithm Explanation',
+                'explanation' => 'The comment explains why the guard clause exists.',
+                'code_snippet' => <<<'CODE'
+public function completionPercentage(int $completed, int $total): float
+{
+    if ($total === 0) {
+        return 0;
+    }
+
+    return ($completed / $total) * 100;
+}
+CODE,
+                'answer' => 'Clean',
+            ],
+            [
+                'title' => 'Concise PHPDoc',
+                'explanation' => 'The PHPDoc describes the purpose of the method without repeating every line.',
+                'code_snippet' => <<<'CODE'
+public function currentUser(): User
+{
+    return auth()->userOrFail();
+}
+CODE,
+                'answer' => 'Clean',
+            ],
+        ];
+
+        $this->updateCards($deck, $cards);
+    }
+
+    private function updateCards(Deck $deck, array $cards): void
+    {
+        foreach ($cards as $card) {
+            $deck->cards()->updateOrCreate(
+                [
+                    'title' => $card['title'],
+                ],
+                [
+                    'explanation' => $card['explanation'],
+                    'code_snippet' => $card['code_snippet'],
+                    'answer' => $card['answer'],
+                ],
+            );
+        }
     }
 }

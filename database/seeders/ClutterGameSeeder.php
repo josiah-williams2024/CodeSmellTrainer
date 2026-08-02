@@ -152,7 +152,6 @@ CODE,
                 'code_snippet' => <<<'CODE'
 public function calculateShipping(float $subtotal): float
 {
-    // Customers who spend over $100 receive free shipping.
     if ($subtotal >= 100) {
         return 0;
     }
@@ -168,7 +167,6 @@ CODE,
                 'code_snippet' => <<<'CODE'
 public function isSuccessful(array $response): bool
 {
-    // Legacy payment gateway returns "0" instead of false.
     return $response['status'] !== '0';
 }
 CODE,
@@ -180,7 +178,6 @@ CODE,
                 'code_snippet' => <<<'CODE'
 public function generateToken(): string
 {
-    // TODO: Replace with UUIDv7 once the library is upgraded.
     return bin2hex(random_bytes(32));
 }
 CODE,
@@ -192,7 +189,6 @@ CODE,
                 'code_snippet' => <<<'CODE'
 public function completionPercentage(int $completed, int $total): float
 {
-    // Avoid dividing by zero when no tasks have been created yet.
     if ($total === 0) {
         return 0;
     }
@@ -206,9 +202,7 @@ CODE,
                 'title' => 'Concise PHPDoc',
                 'explanation' => 'The PHPDoc describes the purpose of the method without repeating every line.',
                 'code_snippet' => <<<'CODE'
-/**
- * Returns the authenticated user or throws an exception.
- */
+
 public function currentUser(): User
 {
     return auth()->userOrFail();
