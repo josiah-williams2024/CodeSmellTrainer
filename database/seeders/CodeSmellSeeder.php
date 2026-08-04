@@ -12,7 +12,7 @@ class CodeSmellSeeder extends Seeder
      */
     public function run(): void
     {
-        CodeSmell::query()->create([
+        CodeSmell::query()->firstOrCreate([
             'name' => 'Long Method',
             'slug' => 'long-method',
             'summary' => 'Methods that are too long and try to do too many things.',
@@ -22,7 +22,7 @@ TEXT,
             'reference_url' => 'https://refactoring.guru/smells/long-method',
         ]);
 
-        CodeSmell::query()->create([
+        CodeSmell::query()->firstOrCreate([
             'name' => 'Clutter',
             'slug' => 'clutter',
             'summary' => 'Unnecessary code and information that make the code harder to read.',
@@ -32,7 +32,7 @@ TEXT,
             'reference_url' => 'https://refactoring.guru/smells/comments',
         ]);
 
-        CodeSmell::query()->create([
+        CodeSmell::query()->firstOrCreate([
             'name' => 'Duplication',
             'slug' => 'duplication',
             'summary' => 'The same or very similar code appears in multiple places.',
@@ -41,5 +41,39 @@ Duplicate code occurs when the same logic is copied into multiple methods, class
 TEXT,
             'reference_url' => 'https://refactoring.guru/smells/duplicate-code',
         ]);
+
+        CodeSmell::query()->firstOrCreate([
+            'name' => 'Deeply Nested Conditionals',
+            'slug' => 'nested-conditionals',
+            'summary' => 'Multiple levels of nested if statements make code difficult to read and follow.',
+            'content' => <<<'TEXT'
+Deeply nested conditionals, sometimes called "arrow code," reduce readability and make it harder to understand the flow of a method. They can often be simplified using guard clauses, early returns, or by extracting logic into separate methods.
+TEXT,
+            'reference_url' => 'https://refactoring.guru/replace-nested-conditional-with-guard-clauses',
+        ]);
+
+        CodeSmell::query()->firstOrCreate(
+            [
+                'name' => 'Long Parameter List',
+                'slug' => 'long-parameter-list',
+                'summary' => 'Methods require too many parameters, making them harder to understand and use.',
+                'content' => <<<'TEXT'
+A long parameter list often indicates that a method is doing too much or that related data should be grouped into an object. Long parameter lists are harder to read, easier to misuse, and make methods more difficult to maintain.
+TEXT,
+                'reference_url' => 'https://refactoring.guru/smells/long-parameter-list',
+            ]
+        );
+
+        CodeSmell::query()->firstOrCreate(
+            [
+                'name' => 'Magic Numbers',
+                'slug' => 'magic-numbers',
+                'summary' => 'Hardcoded numeric values appear without explaining what they represent.',
+                'content' => <<<'TEXT'
+Magic numbers are literal numeric values used directly in code without meaningful names. Replacing them with named constants or enums makes code easier to understand, maintain, and modify.
+TEXT,
+                'reference_url' => 'https://refactoring.guru/replace-magic-number-with-symbolic-constant',
+            ]
+        );
     }
 }
