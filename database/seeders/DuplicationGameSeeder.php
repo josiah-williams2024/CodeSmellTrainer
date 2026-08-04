@@ -12,7 +12,7 @@ class DuplicationGameSeeder extends Seeder
      */
     public function run(): void
     {
-        $deck = Deck::create([
+        $deck = Deck::firstOrCreate([
             'name' => 'Duplication Code Detection',
             'description' => 'This deck will allow the user to get better at recognizing duplicate code.',
             'code_smell_id' => '3',
