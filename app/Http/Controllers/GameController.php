@@ -73,6 +73,7 @@ class GameController extends Controller
             3 => 'GameDeck/DuplicationDetection',
             4 => 'GameDeck/NestedConditionals',
             5 => 'GameDeck/LongParameterList',
+            6 => 'GameDeck/MagicNumbers',
             default => abort(404),
         };
 
