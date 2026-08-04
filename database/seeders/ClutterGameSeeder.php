@@ -13,7 +13,7 @@ class ClutterGameSeeder extends Seeder
      */
     public function run(): void
     {
-        $deck = Deck::create([
+        $deck = Deck::firstOrCreate([
             'name' => 'Clutter Code Detection',
             'description' => 'This deck will allow the user to get better at recognizing excessive and unnecessary clutter.',
             'code_smell_id' => '2',

@@ -13,7 +13,7 @@ class LongMethodGameSeeder extends Seeder
     public function run(): void
     {
 
-        $deck = Deck::create([
+        $deck = Deck::firstOrCreate([
             'name' => 'Long Method Detection',
             'description' => 'This deck will allow the user to get better at recognizing long methods',
             'code_smell_id' => '1',
