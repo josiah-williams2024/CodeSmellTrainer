@@ -71,6 +71,7 @@ class GameController extends Controller
             1 => 'GameDeck/LongMethod',
             2 => 'GameDeck/ClutterDetection',
             3 => 'GameDeck/DuplicationDetection',
+            4 => 'GameDeck/NestedConditionals',
             default => abort(404),
         };
 

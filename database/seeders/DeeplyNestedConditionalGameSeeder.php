@@ -205,7 +205,7 @@ public function approve(LoanApplication $application): bool
     return true;
 }
 CODE,
-                'answer' => 'Nested Conditionals',
+                'answer' => 'Not Nested Conditionals',
             ],
             [
                 'title' => 'Delete Account (Guard Clauses)',
@@ -232,7 +232,7 @@ public function delete(User $user): bool
     return true;
 }
 CODE,
-                'answer' => 'Nested Conditionals',
+                'answer' => 'Not Nested Conditionals',
             ],
             [
                 'title' => 'Checkout Order (Guard Clauses)',
@@ -259,7 +259,7 @@ public function checkout(Cart $cart): bool
     return true;
 }
 CODE,
-                'answer' => 'Nested Conditionals',
+                'answer' => 'Not Nested Conditionals',
             ],
         ]);
     }
