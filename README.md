@@ -4,8 +4,6 @@ This project is inspired by Llewellyn Falco. Its main focus is helping developer
 
 ## Features
 
-### To Be Implemented
-
 - Deck-based code smell training
 - Rapid pattern recognition exercises
 - Performance tracking
