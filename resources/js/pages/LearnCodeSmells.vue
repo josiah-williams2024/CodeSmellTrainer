@@ -8,7 +8,7 @@ type CodeSmell = {
     summary: string;
     content: string;
     reference_url: string;
-    deck: {
+    deck?: {
         id: number;
     };
 };

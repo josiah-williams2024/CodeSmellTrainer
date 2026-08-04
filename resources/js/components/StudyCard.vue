@@ -8,7 +8,7 @@ type CodeSmell = {
     summary: string;
     content: string;
     reference_url: string;
-    deck: {
+    deck?: {
         id: number;
     };
 };
@@ -44,11 +44,19 @@ defineProps<{
             </a>
 
             <Link
+                v-if="codeSmell.deck?.id"
                 :href="gameController.show(codeSmell.deck.id)"
                 class="flex min-h-11 w-full items-center justify-center rounded-md bg-primary px-4 py-2 text-center text-primary-foreground transition hover:opacity-90 sm:flex-1"
             >
                 Play
             </Link>
+            <button
+                v-else
+                disabled
+                class="flex min-h-11 w-full items-center justify-center rounded-md bg-muted px-4 py-2 text-center text-muted-foreground sm:flex-1"
+            >
+                Coming Soon
+            </button>
         </div>
     </article>
 </template>
