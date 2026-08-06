@@ -25,7 +25,6 @@ class LeaderboardController extends Controller
                 ->where('game_results.deck_id', $deck->id)
                 ->groupBy('users.id', 'users.name')
                 ->orderByDesc('average_score')
-                ->limit(5)
                 ->get()
                 ->values()
                 ->map(function ($player, $index) {
