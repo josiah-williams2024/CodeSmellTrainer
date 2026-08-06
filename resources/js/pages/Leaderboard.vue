@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Head } from '@inertiajs/vue3';
+import { Head, usePoll } from '@inertiajs/vue3';
 import LeaderboardCard from '@/components/ui/LeaderboardCard.vue';
 
 type LeaderboardEntry = {
@@ -19,6 +19,11 @@ type DeckLeaderboard = {
 defineProps<{
     leaderboards: DeckLeaderboard[];
 }>();
+
+usePoll(3000, {
+    only: ['leaderboards'],
+});
+
 </script>
 
 <template>
