@@ -20,20 +20,19 @@ defineProps<{
         >
             {{ title }}
         </h2>
-
-        <div class="flex-1 overflow-y-auto max-h-80 space-y-2 text-sm sm:text-base">
+        <div class="overflow-y-auto pr-4 text-sm sm:text-base max-h-44">
             <div
                 v-for="player in leaderboard"
                 :key="player.rank"
-                class="flex items-start justify-between gap-4"
+                class="flex items-center justify-between gap-4 py-1"
             >
-                <span class="min-w-0 truncate text-primary">
-                    {{ player.rank }}. {{ player.name }}
-                </span>
+        <span class="min-w-0 truncate text-primary">
+            {{ player.rank }}. {{ player.name }}
+        </span>
 
                 <span class="shrink-0 font-medium text-card-foreground">
-                    {{ player.averageScore.toFixed(2) }}
-                </span>
+            {{ player.averageScore.toFixed(2) }}
+        </span>
             </div>
 
             <p
