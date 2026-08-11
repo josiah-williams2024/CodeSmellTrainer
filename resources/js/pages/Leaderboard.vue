@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Head, usePoll, router } from '@inertiajs/vue3';
-import {ref, watch} from 'vue';
+import { ref, watch } from 'vue';
 import LeaderboardCard from '@/components/ui/LeaderboardCard.vue';
 
 type LeaderboardEntry = {
@@ -25,15 +25,16 @@ const props = defineProps<{
 const selectedPeriod = ref(props.period);
 
 watch(selectedPeriod, (period) => {
-    router.get('/leaderboard', { period },
+    router.get(
+        '/leaderboard',
+        { period },
         {
-         preserveState: true,
-         preserveScroll: true,
-         replace: true,
-        }
+            preserveState: true,
+            preserveScroll: true,
+            replace: true,
+        },
     );
 });
-
 
 usePoll(3000, {
     only: ['leaderboards'],
@@ -53,7 +54,7 @@ usePoll(3000, {
 
             <select
                 v-model="selectedPeriod"
-                class="absolute top-0 right-0 rounded-md border-border bg-background px-3 py-2 text-sm"
+                class="absolute top-0 right-0 rounded-md border-2 border-primary bg-background px-3 py-2 text-sm"
             >
                 <option value="daily">Daily</option>
                 <option value="weekly">Weekly</option>
