@@ -52,7 +52,6 @@ class GameController extends Controller
             'accuracy' => $validate['accuracy'],
             'time_seconds' => $validate['time_seconds'],
         ]);
-        // I don't think I want to change the page, let the user select their next action
     }
 
     /**
