@@ -22,14 +22,6 @@ class GameController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
@@ -52,7 +44,6 @@ class GameController extends Controller
             'accuracy' => $validate['accuracy'],
             'time_seconds' => $validate['time_seconds'],
         ]);
-        // I don't think I want to change the page, let the user select their next action
     }
 
     /**
@@ -82,27 +73,4 @@ class GameController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }
