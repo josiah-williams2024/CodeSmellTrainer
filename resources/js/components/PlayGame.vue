@@ -3,14 +3,8 @@ import { computed, onMounted, onUnmounted, ref } from 'vue';
 import gameController from '@/actions/App/Http/Controllers/GameController';
 import { useGame } from '@/composables/useGame';
 import { highlightCode } from '@/lib/shiki';
+import type { AnswerReview, Card } from '@/types/game';
 import GameResults from './GameResults.vue';
-
-type Card = {
-    id: number;
-    code_snippet: string;
-    answer: string;
-    explanation: string;
-};
 
 type Deck = {
     id: number;
@@ -26,6 +20,7 @@ const props = defineProps<{
 }>();
 
 const highlightedCards = ref<string[]>([]);
+const answerReviews = ref<AnswerReview[]>([]);
 const gameEndpoint = gameController.store();
 
 const {
@@ -79,6 +74,13 @@ const submitAnswer = (choice: string) => {
     const isCorrect = choice === currentCard.value.answer;
     const isLastQuestion =
         questionsAnswered.value + 1 >= props.deck.cards.length;
+
+    answerReviews.value.push({
+        card: currentCard.value,
+        highlightedCode: highlightedCards.value[currentCardIndex.value] ?? '',
+        selectedAnswer: choice,
+        isCorrect,
+    });
 
     answerQuestion(isCorrect);
 
@@ -170,6 +172,7 @@ onUnmounted(() => {
             :accuracy="accuracy"
             :score="score"
             :formatted-time="formattedTime"
+            :answer-reviews="answerReviews"
         />
     </main>
 </template>
