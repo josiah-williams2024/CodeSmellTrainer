@@ -11,5 +11,14 @@ jobs:
 
     steps:
       - name: Trigger deployment
+        env:
+          DEPLOY_WEBHOOK: ${{ secrets.DEPLOY_WEBHOOK }}
         run: |
-          curl -X POST "${{ secrets.DEPLOY_WEBHOOK }}"
+          if [[ -z "$DEPLOY_WEBHOOK" ]]; then
+            echo "DEPLOY_WEBHOOK is not configured" >&2
+            exit 1
+          fi
+
+          curl --fail --silent --show-error --max-time 30 \
+            --output /dev/null --write-out 'Webhook HTTP %{http_code}\n' \
+            --request POST "$DEPLOY_WEBHOOK"
