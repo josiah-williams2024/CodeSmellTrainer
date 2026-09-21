@@ -8,7 +8,7 @@ import { register } from '@/routes';
 
 <template>
     <Head title="Home" />
-
+    <h1>Tacos Test Here</h1>
     <div
         class="flex min-h-screen flex-col items-center bg-background p-4 text-foreground sm:p-6 lg:justify-center lg:p-8"
     >
